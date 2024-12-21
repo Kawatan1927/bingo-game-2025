@@ -1,0 +1,358 @@
+/* 基本スタイル */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+    color: white;
+}
+
+/* 全画面ボタン */
+#fullscreenBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+/* 画面共通スタイル */
+.screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ビンゴ画面 */
+.bingo-container {
+    display: flex;
+    width: 100%;
+    height: 80%;
+}
+
+.number-display {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-history {
+    width: 30%;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* ビンゴ数字表示 */
+.mega-text {
+    font-size: 35vh;
+    text-align: center;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+}
+
+/* 画面タイトル */
+.screen-title {
+    font-size: 6vh;
+    text-align: center;
+    margin: 20px 0;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* ボタンスタイル */
+.small-button {
+    font-size: 2vh;
+    padding: 10px 20px;
+    margin: 10px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: black;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.small-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* 履歴表示 */
+.number-history h2 {
+    font-size: 4vh;
+    margin-bottom: 20px;
+}
+
+#numberHistory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.history-number {
+    font-size: 4vh;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 斧選択エリア */
+.axe-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.axe {
+    position: relative;
+    width: 30vh;
+    height: 30vh;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.axe img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.axe:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* ガイドテキスト */
+.guide-text {
+    font-size: 3vh;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: pulse 1s infinite;
+}
+
+/* 結果テキスト */
+.result-text {
+    font-size: 8vh;
+    text-align: center;
+    margin: 30px 0;
+    color: #FFD700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    animation: reveal 1s ease-out forwards;
+}
+
+/* 景品グリッド */
+.prize-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    width: 90%;
+    height: 70vh;
+    margin: 20px auto;
+}
+
+.prize-item {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.prize-item img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+}
+
+.prize-number {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 2.5vh;
+    text-align: center;
+    color: #FFD700;
+}
+
+.prize-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.prize-item.selected {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.prize-item.selected::after {
+    content: '選択済み';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 4vh;
+    color: #FFD700;
+    text-shadow: 2px 2px 4px black;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border: 2px solid #FFD700;
+    white-space: nowrap;
+}
+
+/* 当選表示 */
+.win-display {
+    text-align: center;
+    font-size: 4vh;
+    margin: 30px 0;
+}
+
+.win-display img {
+    max-width: 60%;
+    max-height: 50vh;
+    margin-bottom: 30px;
+    border: 5px solid #FFD700;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* アニメーション */
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes reveal {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 画面遷移アニメーション */
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 花火エフェクト */
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: firework 1s ease-out forwards;
+}
+
+@keyframes firework {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty));
+        opacity: 0;
+    }
+}
+
+/* キラキラエフェクト */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #FFD700;
+    border-radius: 50%;
+    animation: sparkle 1.5s linear infinite;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .bingo-container {
+        flex-direction: column;
+    }
+
+    .number-display, .number-history {
+        width: 100%;
+    }
+
+    .mega-text {
+        font-size: 20vh;
+    }
+
+    .prize-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
+}

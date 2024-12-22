@@ -62,6 +62,7 @@ document.getElementById('drawButton').addEventListener('click', () => {
     } while (calledNumbers.includes(number));
 
     animateNumber(number);
+    setTimeout(() => enhanceDrawAnimation(number), 5000);
 });
 
 // 数字めくりアニメーション
@@ -71,7 +72,7 @@ function animateNumber(targetNumber) {
     const duration = 5000; // 5秒間
     const interval = 50; // 50ミリ秒ごとに更新
     const steps = duration / interval;
-    
+
     const animation = setInterval(() => {
         if (count < steps) {
             currentNumber.textContent = Math.floor(Math.random() * 75) + 1;
@@ -130,11 +131,11 @@ document.addEventListener('keydown', (e) => {
 function showAxeResult() {
     showScreen('resultScreen');
     const resultMessage = document.getElementById('resultMessage');
-    
+
     const message = selectedAxe === 'left' ?
         '右が金の斧でした。左が銀の斧でした。' :
         '左が金の斧でした。右が銀の斧でした。';
-    
+
     resultMessage.textContent = '';
     let i = 0;
     const typeInterval = setInterval(() => {
@@ -155,27 +156,27 @@ function showAxeResult() {
 function createPrizeGrid(isGold) {
     const gridContainer = document.getElementById(isGold ? 'goldPrizeGrid' : 'silverPrizeGrid');
     const prizeList = isGold ? prizes.gold : prizes.silver;
-    
+
     gridContainer.innerHTML = '';
     prizeList.forEach(prize => {
         const item = document.createElement('div');
         item.className = `prize-item ${prize.selected ? 'selected' : ''}`;
-        
+
         const img = document.createElement('img');
         img.src = prize.image;
         img.alt = `景品 ${prize.id}`;
-        
+
         const number = document.createElement('div');
         number.className = 'prize-number';
         number.textContent = prize.id;
-        
+
         item.appendChild(img);
         item.appendChild(number);
-        
+
         if (!prize.selected) {
             item.addEventListener('click', () => selectPrize(prize, isGold));
         }
-        
+
         gridContainer.appendChild(item);
     });
 }
@@ -184,17 +185,17 @@ function createPrizeGrid(isGold) {
 function selectPrize(prize, isGold) {
     prize.selected = true;
     winSound.play();
-    
+
     const winScreen = isGold ? 'goldWinScreen' : 'silverWinScreen';
     const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
-    
+
     winDisplay.innerHTML = `
         <img src="${prize.image}" alt="当選景品">
         <div class="prize-info">
             <h2>景品番号 ${prize.id}</h2>
         </div>
     `;
-    
+
     showScreen(winScreen);
 }
 
@@ -262,24 +263,6 @@ function enhancePrizeSelection(prize) {
     prize.classList.add('selected');
 }
 
-// ビンゴ番号抽選のイベントリスナーを更新
-document.getElementById('drawButton').addEventListener('click', () => {
-    if (calledNumbers.length >= 75) {
-        alert('すべての番号が出ました');
-        return;
-    }
-
-    drawSound.play();
-
-    let number;
-    do {
-        number = Math.floor(Math.random() * 75) + 1;
-    } while (calledNumbers.includes(number));
-
-    animateNumber(number);
-    setTimeout(() => enhanceDrawAnimation(number), 5000); // 5秒後に演出を追加
-});
-
 // 斧選択のイベントリスナーを更新
 document.querySelectorAll('.axe').forEach(axe => {
     axe.addEventListener('click', () => {
@@ -294,17 +277,17 @@ document.querySelectorAll('.axe').forEach(axe => {
 function selectPrize(prize, isGold) {
     prize.selected = true;
     winSound.play();
-    
+
     const winScreen = isGold ? 'goldWinScreen' : 'silverWinScreen';
     const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
-    
+
     winDisplay.innerHTML = `
         <img src="${prize.image}" alt="当選景品">
         <div class="prize-info">
             <h2>景品番号 ${prize.id}</h2>
         </div>
     `;
-    
+
     showScreen(winScreen);
     enhancePrizeSelection(winDisplay);
 }

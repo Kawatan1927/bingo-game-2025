@@ -42,7 +42,7 @@ document.addEventListener('keydown', (e) => {
 
 // 起動時にビンゴ番号配列を生成する
 window.onload = function(){
-    bingoNumbers = fisherYatesShuffle(forRange(1, 75));
+    bingoNumbers = fisherYateShuffle(forRange(1, 75));
     console.log(bingoNumbers);
 };
 

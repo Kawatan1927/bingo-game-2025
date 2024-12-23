@@ -1,5 +1,7 @@
 // グローバル変数
+let bingoNumbers = [];
 let calledNumbers = [];
+let drawingCount = 0;
 let selectedAxe = null;
 let currentScreen = 'bingoScreen';
 
@@ -38,6 +40,32 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// 起動時にビンゴ番号配列を生成する
+window.onload = function(){
+    bingoNumbers = fisherYateShuffle(forRange(1, 75));
+    console.log(bingoNumbers);
+};
+
+// a~zまでの連番配列作成関数
+const forRange = (a, z) => {
+    var lst = [];
+    for (let i = a; i <= z; i++){
+        lst.push(i)
+    }
+    return lst
+}
+
+// 配列シャッフル関数(Fisher-Yate Shuffle)
+function fisherYateShuffle(numberArray){
+    for(i = numberArray.length - 1; i > 0; i--){
+        r = Math.floor(Math.random() * (i + 1));
+        tmp = numberArray[i];
+        numberArray[i] = numberArray[r];
+        numberArray[r] = tmp;
+    }
+    return numberArray;
+};
+
 // 画面遷移
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
@@ -47,7 +75,7 @@ function showScreen(screenId) {
     currentScreen = screenId;
 }
 
-// ビンゴ番号抽選
+// ビンゴ番号抽選(シャッフル後の配列を先頭から参照する)
 document.getElementById('drawButton').addEventListener('click', () => {
     if (calledNumbers.length >= 75) {
         alert('すべての番号が出ました');
@@ -56,10 +84,8 @@ document.getElementById('drawButton').addEventListener('click', () => {
 
     drawSound.play();
 
-    let number;
-    do {
-        number = Math.floor(Math.random() * 75) + 1;
-    } while (calledNumbers.includes(number));
+    let number = bingoNumbers[drawingCount];
+    drawingCount++;
 
     animateNumber(number);
     setTimeout(() => enhanceDrawAnimation(number), 5000);

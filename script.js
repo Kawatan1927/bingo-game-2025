@@ -41,7 +41,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // 起動時にビンゴ番号配列を生成する
-window.onload = function(){
+window.onload = function () {
     bingoNumbers = fisherYateShuffle(forRange(1, 75));
     console.log(bingoNumbers);
 };
@@ -49,15 +49,15 @@ window.onload = function(){
 // a~zまでの連番配列作成関数
 const forRange = (a, z) => {
     var lst = [];
-    for (let i = a; i <= z; i++){
+    for (let i = a; i <= z; i++) {
         lst.push(i)
     }
     return lst
 }
 
 // 配列シャッフル関数(Fisher-Yate Shuffle)
-function fisherYateShuffle(numberArray){
-    for(i = numberArray.length - 1; i > 0; i--){
+function fisherYateShuffle(numberArray) {
+    for (i = numberArray.length - 1; i > 0; i--) {
         r = Math.floor(Math.random() * (i + 1));
         tmp = numberArray[i];
         numberArray[i] = numberArray[r];
@@ -77,10 +77,19 @@ function showScreen(screenId) {
 
 // ビンゴ番号抽選(シャッフル後の配列を先頭から参照する)
 document.getElementById('drawButton').addEventListener('click', () => {
+    const drawButton = document.getElementById('drawButton');
+    const toAxeButton = document.getElementById('toAxeButton');
+
     if (calledNumbers.length >= 75) {
         alert('すべての番号が出ました');
         return;
     }
+
+    // ボタンを無効化してアニメーションを開始
+    drawButton.disabled = true;
+    toAxeButton.disabled = true;
+    drawButton.style.opacity = '0.5';
+    toAxeButton.style.opacity = '0.5';
 
     drawSound.play();
 
@@ -88,7 +97,15 @@ document.getElementById('drawButton').addEventListener('click', () => {
     drawingCount++;
 
     animateNumber(number);
-    setTimeout(() => enhanceDrawAnimation(number), 5000);
+
+    // アニメーション完了後にボタンを再度有効化
+    setTimeout(() => {
+        drawButton.disabled = false;
+        toAxeButton.disabled = false;
+        drawButton.style.opacity = '1.0';
+        toAxeButton.style.opacity = '1.0';
+        enhanceDrawAnimation(number);
+    }, 5000);
 });
 
 // 数字めくりアニメーション

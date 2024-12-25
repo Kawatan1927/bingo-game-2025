@@ -26,7 +26,7 @@
       "styles.css"
     ],
     "win": {
-      "icon": "assets/win/game_fun_family_bingo_activity_icon_225822.ico",
+      "icon": "assets/win/bingo.ico",
       "target": "nsis"
     },
     "nsis" :{

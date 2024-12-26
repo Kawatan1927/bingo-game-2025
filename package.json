@@ -1,0 +1,42 @@
+{
+  "name": "bingo-game-2024",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder build"
+  },
+  "keywords": [],
+  "author": "solxyz-new-year-party-WG",
+  "license": "ISC",
+  "description": "",
+  "build": {
+    "appId": "com.electron.bingo-game-2024",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "assets",
+      "images",
+      "bingo.html",
+      "main.js",
+      "package-lock.json",
+      "package.json",
+      "script.js",
+      "styles.css"
+    ],
+    "win": {
+      "icon": "assets/win/bingo.ico",
+      "target": "nsis"
+    },
+    "nsis" :{
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  }
+}

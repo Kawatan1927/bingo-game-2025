@@ -351,7 +351,7 @@ app.on('ready', function() {
     アプリケーションウインドウが立ち上がります。<br />
     終了する際は、ウインドウを閉じてください。
 
-6. 起動ショートカット設定をします。<br />
+5. 起動ショートカット設定をします。<br />
     ```package.json```に以下のように設定を追加しておくとコマンド```npm start```で起動が行えるようになります。
 
     ```json:package.json
@@ -364,66 +364,67 @@ app.on('ready', function() {
     ...(略)...
     }
     ```
-7. アプリケーションのビルドを行います。
+6. アプリケーションのビルドを行います。
     ビルドにはelectron-bulderを使用します。以下のコマンドを実行して、electron-builderをインストールしてください。
-```実行結果
-\electron-test>npm install -D electron-builder
-```
+   
+    ```実行結果
+    \electron-test>npm install -D electron-builder
+    ```
 
 >[!WARNING]
 >- 上記のように```-D```オプションを付与してdevDependenciesとして追加しないと、ビルド時にエラーが出ます。
 
-続いて、```package.json```に以下のようにビルド設定を追加します。<br />
-buildキーは必ず一番上の階層(=nameやversionと同じ階層)に設置してください。
+7. 続いて、```package.json```に以下のようにビルド設定を追加します。<br />
+    buildキーは必ず一番上の階層(=nameやversionと同じ階層)に設置してください。
 
-```json:package.json
-{
-...(略)...
-    "build": {
-        "appId": "com.electron.yourapp",
-        "directories": {
-            "output": "dist"
+    ```json:package.json
+    {
+    ...(略)...
+        "build": {
+            "appId": "com.electron.yourapp",
+            "directories": {
+                "output": "dist"
+            },
+        "files": [
+            "assets",
+            "index.html",
+            "main.js",
+            "package.json",
+            "package-lock.json"
+            ],
+        "mac": {
+            "icon": "assets/win/icon.ico",
+            "target": [
+                "dmg"
+                ]
+            },
+        "win": {
+            "icon": "assets/win/icon_win.ico",
+            "target": "nsis"
+            },
+        "nsis":{
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true
+            }
         },
-    "files": [
-        "assets",
-        "index.html",
-        "main.js",
-        "package.json",
-        "package-lock.json"
-        ],
-    "mac": {
-        "icon": "assets/win/icon.ico",
-        "target": [
-            "dmg"
-            ]
-        },
-    "win": {
-        "icon": "assets/win/icon_win.ico",
-        "target": "nsis"
-        },
-    "nsis":{
-        "oneClick": false,
-        "allowToChangeInstallationDirectory": true
-        }
-    },
- ...(略)...
-}
-```
+     ...(略)...
+    }
+    ```
 
-各項目の意味については以下の通りです。
-- appId : アプリのBundle ID。
-- directories
-- output : ビルドしたアプリの格納先
-- files : ビルドに含めるファイル
-- mac : Mac用にビルドするときの設定
-- icon : アイコンファイルの相対パス
-- target : パッケージ後のファイル形式
-- win : Windows用にビルドするときの設定
-- icon : アイコンファイルの相対パス
-- target : パッケージ後のファイル形式
-- nsis : インストーラ生成ツールNSISの設定
-- oneClick : インストールから実行まで一気に行うかどうか
-- allowToChangeInstallationDirectory : インストール先の変更を許可するかどうか
+    各項目の意味については以下の通りです。
+    - appId : アプリのBundle ID。
+    - directories
+    - output : ビルドしたアプリの格納先
+    - files : ビルドに含めるファイル
+    - mac : Mac用にビルドするときの設定
+    - icon : アイコンファイルの相対パス
+    - target : パッケージ後のファイル形式
+    - win : Windows用にビルドするときの設定
+    - icon : アイコンファイルの相対パス
+    - target : パッケージ後のファイル形式
+    - nsis : インストーラ生成ツールNSISの設定
+    - oneClick : インストールから実行まで一気に行うかどうか
+    - allowToChangeInstallationDirectory : インストール先の変更を許可するかどうか
 <br />
 
 >[!NOTE]
@@ -432,7 +433,8 @@ buildキーは必ず一番上の階層(=nameやversionと同じ階層)に設置�
 >- Windows用：.icoファイル
 >- Mac用：icnsファイル
 
-ここまで完了したら以下のコマンドを実行してビルドを行ってください。
+<br />
+    ここまで完了したら以下のコマンドを実行してビルドを行ってください。
 
 >[!CAUTION]
 >管理者権限で開いたコマンドプロンプトで実行してください。

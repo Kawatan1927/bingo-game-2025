@@ -365,7 +365,7 @@ app.on('ready', function() {
     }
     ```
 6. アプリケーションのビルドを行います。
-    ビルドにはelectron-bulderを使用します。以下のコマンドを実行して、electron-builderをインストールしてください。
+    ビルドにはelectron-builderを使用します。以下のコマンドを実行して、electron-builderをインストールしてください。
    
     ```実行結果
     \electron-test>npm install -D electron-builder

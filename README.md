@@ -141,7 +141,7 @@ v22.12.0
 #### 6.0.3. Electron のインストール
 
 2024/12/28時点で
-<a href="https://github.com/Kawatan1927/bingo-game-2024">*GitHubに上がっている本プロジェクト*</a>
+<a href="https://github.com/Kawatan1927/bingo-game-2025">*GitHubに上がっている本プロジェクト*</a>
 に対してElectronおよびビルドに用いるelectron-builderをインストールする方法を解説します。
 
 1. はじめにプロジェクトのソースをダウンロードします。

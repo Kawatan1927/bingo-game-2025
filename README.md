@@ -378,54 +378,54 @@ app.on('ready', function() {
 <br />
     buildキーは必ず一番上の階層(=nameやversionと同じ階層)に設置してください。
 
-    ```json:package.json
-    {
+```json:package.json
+{
+...(略)...
+"build": {
+    "appId": "com.electron.yourapp",
+    "directories": {
+        "output": "dist"
+    },
+    "files": [
+        "assets",
+        "index.html",
+        "main.js",
+        "package.json",
+        "package-lock.json"
+    ],
+    "mac": {
+        "icon": "assets/mac/icon.ico",
+        "target": [
+            "dmg"
+        ]
+    },
+    "win": {
+        "icon": "assets/win/icon_win.ico",
+        "target": "nsis"
+    },
+    "nsis":{
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true
+     }
+    },
     ...(略)...
-        "build": {
-            "appId": "com.electron.yourapp",
-            "directories": {
-                "output": "dist"
-            },
-        "files": [
-            "assets",
-            "index.html",
-            "main.js",
-            "package.json",
-            "package-lock.json"
-            ],
-        "mac": {
-            "icon": "assets/win/icon.ico",
-            "target": [
-                "dmg"
-                ]
-            },
-        "win": {
-            "icon": "assets/win/icon_win.ico",
-            "target": "nsis"
-            },
-        "nsis":{
-            "oneClick": false,
-            "allowToChangeInstallationDirectory": true
-            }
-        },
-     ...(略)...
-    }
-    ```
+}
+```
 
-    各項目の意味については以下の通りです。
-    - appId : アプリのBundle ID。
-    - directories
-    - output : ビルドしたアプリの格納先
-    - files : ビルドに含めるファイル
-    - mac : Mac用にビルドするときの設定
-    - icon : アイコンファイルの相対パス
-    - target : パッケージ後のファイル形式
-    - win : Windows用にビルドするときの設定
-    - icon : アイコンファイルの相対パス
-    - target : パッケージ後のファイル形式
-    - nsis : インストーラ生成ツールNSISの設定
-    - oneClick : インストールから実行まで一気に行うかどうか
-    - allowToChangeInstallationDirectory : インストール先の変更を許可するかどうか
+各項目の意味については以下の通りです。
+- appId : アプリのBundle ID。
+- directories
+- output : ビルドしたアプリの格納先
+- files : ビルドに含めるファイル
+- mac : Mac用にビルドするときの設定
+- icon : アイコンファイルの相対パス
+- target : パッケージ後のファイル形式
+- win : Windows用にビルドするときの設定
+- icon : アイコンファイルの相対パス
+- target : パッケージ後のファイル形式
+- nsis : インストーラ生成ツールNSISの設定
+- oneClick : インストールから実行まで一気に行うかどうか
+- allowToChangeInstallationDirectory : インストール先の変更を許可するかどうか
 <br />
 
 >[!NOTE]

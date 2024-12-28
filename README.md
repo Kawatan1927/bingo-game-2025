@@ -153,7 +153,7 @@ zipをダウンロードするなり、自分のワークスペースにcloneす
 >- ```package.json```<br />
 >現在のプロジェクト情報を保存するファイルです。
 >- ```package-lock.json```<br />
->依存関係のパッケージのバージョンの詳細情報が記載されたファイルで、今回はこのファイルに記載されている情報を用いてElectronと>electron-builderをインストールします。<br />
+>依存関係のパッケージのバージョンの詳細情報が記載されたファイルで、今回はこのファイルに記載されている情報を用いてElectronとelectron-builderをインストールします。<br />
 >**編集・削除は行わないでください。**
 
 3. コマンドプロンプトを開き、プロジェクトフォルダ内に移動した後、コマンド```npm ci```を実行してください。
@@ -189,7 +189,7 @@ zipをダウンロードするなり、自分のワークスペースにcloneす
 5. コマンド```npm start```を実行するとアプリが起動します。
    
    ```実行結果
-   \bingo-game-2024-main>npm start
+   \bingo-game-2024>npm start
 
     > bingo-game-2024@1.0.0 start
     > electron .
@@ -325,20 +325,20 @@ app.on('ready', function() {
 });
 ```
 
-    続いて、```index.html```に「Hello World」を書きます。
+続いて、```index.html```に「Hello World」を書きます。
 
-    ```html:index.html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Sample</title>
-        </head>
-        <body>
-            <p>Hello World</p>
-        </body>
-    </html>
-    ```
+```html:index.html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sample</title>
+    </head>
+    <body>
+        <p>Hello World</p>
+    </body>
+</html>
+```
 
 4. アプリケーションを開始します。
 

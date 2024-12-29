@@ -77,8 +77,7 @@ function showScreen(screenId) {
 
 // ビンゴ番号抽選(シャッフル後の配列を先頭から参照する)
 document.getElementById('drawButton').addEventListener('click', () => {
-    const drawButton = document.getElementById('drawButton');
-    const toAxeButton = document.getElementById('toAxeButton');
+    const gameControlButtons = document.querySelectorAll('.game-control-btn');
 
     if (calledNumbers.length >= 75) {
         alert('すべての番号が出ました');
@@ -86,10 +85,10 @@ document.getElementById('drawButton').addEventListener('click', () => {
     }
 
     // ボタンを無効化してアニメーションを開始
-    drawButton.disabled = true;
-    toAxeButton.disabled = true;
-    drawButton.style.opacity = '0.5';
-    toAxeButton.style.opacity = '0.5';
+    gameControlButtons.forEach(button => {
+        button.disabled = true;
+        button.style.opacity = '0.5';
+    });
 
     drawSound.play();
 
@@ -100,10 +99,10 @@ document.getElementById('drawButton').addEventListener('click', () => {
 
     // アニメーション完了後にボタンを再度有効化
     setTimeout(() => {
-        drawButton.disabled = false;
-        toAxeButton.disabled = false;
-        drawButton.style.opacity = '1.0';
-        toAxeButton.style.opacity = '1.0';
+        gameControlButtons.forEach(button => {
+            button.disabled = false;
+            button.style.opacity = '1';
+        });
         enhanceDrawAnimation(number);
     }, 5000);
 });
@@ -144,11 +143,6 @@ function updateHistory() {
 // 斧選択画面への移動
 document.getElementById('toAxeButton').addEventListener('click', () => {
     showScreen('axeScreen');
-});
-
-// ビンゴ画面に戻る
-document.getElementById('backToBingoButton').addEventListener('click', () => {
-    showScreen('bingoScreen');
 });
 
 // 斧の選択
@@ -195,15 +189,27 @@ function showAxeResult() {
     }, 50);
 }
 
-// 景品グリッドの生成
-function createPrizeGrid(isGold) {
-    const gridContainer = document.getElementById(isGold ? 'goldPrizeGrid' : 'silverPrizeGrid');
+/**
+ * 景品一覧画面をグリッドレイアウトで生成する
+ *
+ * @param isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
+ * @param previewMode - プレビューモードの場合はtrue
+ */
+function createPrizeGrid(isGold, previewMode = false) {
+    const gridId = previewMode
+        ? (isGold ? 'goldPreviewGrid' : 'silverPreviewGrid')
+        : (isGold ? 'goldPrizeGrid' : 'silverPrizeGrid');
+
+    const gridContainer = document.getElementById(gridId);
     const prizeList = isGold ? prizes.gold : prizes.silver;
 
     gridContainer.innerHTML = '';
     prizeList.forEach(prize => {
         const item = document.createElement('div');
         item.className = `prize-item ${prize.selected ? 'selected' : ''}`;
+        if (previewMode) {
+            item.classList.add('preview');
+        }
 
         const img = document.createElement('img');
         img.src = prize.image;
@@ -216,7 +222,7 @@ function createPrizeGrid(isGold) {
         item.appendChild(img);
         item.appendChild(number);
 
-        if (!prize.selected) {
+        if (!prize.selected && !previewMode) {
             item.addEventListener('click', () => selectPrize(prize, isGold));
         }
 
@@ -254,9 +260,20 @@ document.addEventListener('DOMContentLoaded', () => {
         createPrizeGrid(true);
     });
 
-    document.getElementById('toBingoButton').addEventListener('click', () => {
-        showScreen('bingoScreen');
-        document.getElementById('currentNumber').textContent = 'BINGO';
+    document.getElementById('previewGoldButton').addEventListener('click', () => {
+        showScreen('goldPreviewScreen');
+        createPrizeGrid(true, true);
+    });
+
+    document.getElementById('previewSilverButton').addEventListener('click', () => {
+        showScreen('silverPreviewScreen');
+        createPrizeGrid(false, true);
+    });
+
+    document.querySelectorAll('.back-to-bingo-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            showScreen('bingoScreen');
+        });
     });
 });
 

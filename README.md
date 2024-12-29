@@ -441,7 +441,7 @@ app.on('ready', function() {
 >管理者権限で開いたコマンドプロンプトで実行してください。
 
 ```実行結果
-\electron-test>.\node_modules\.bin\electron .\
+\electron-test>.\node_modules\.bin\electron-builder build
 ```
 
 全てのメッセージが表示し終えて、プロンプトが再度表示されたらビルド完了です。

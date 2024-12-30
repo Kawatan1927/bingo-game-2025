@@ -2,7 +2,6 @@
 let bingoNumbers = [];
 let calledNumbers = [];
 let drawingCount = 0;
-let selectedAxe = null;
 let currentScreen = 'bingoScreen';
 
 // 音声エフェクト
@@ -142,36 +141,24 @@ function updateHistory() {
 
 // 斧選択画面への移動
 document.getElementById('toAxeButton').addEventListener('click', () => {
-    showScreen('axeScreen');
+    showScreen('axeSelectionScreen');
 });
 
-// 斧の選択
-document.querySelectorAll('.axe').forEach(axe => {
-    axe.addEventListener('click', () => {
-        document.querySelectorAll('.axe').forEach(a => {
-            a.classList.remove('selected');
-        });
-        axe.classList.add('selected');
-        selectedAxe = axe.dataset.axe;
-        axeSelectSound.play();
-    });
-});
-
-// ENTERキーでの結果表示
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && currentScreen === 'axeScreen' && selectedAxe) {
+// 結果発表ボタンクリックで結果表示
+document.getElementById('axeResultButton').addEventListener('click', () => {
+    if (currentScreen === 'axeSelectionScreen') {
         showAxeResult();
     }
-});
+})
 
 // 斧選択結果の表示
 function showAxeResult() {
     showScreen('resultScreen');
     const resultMessage = document.getElementById('resultMessage');
 
-    const message = selectedAxe === 'left' ?
-        '右が金の斧でした。左が銀の斧でした。' :
-        '左が金の斧でした。右が銀の斧でした。';
+    const message = Math.random() > 0.5 ?
+        '当たりは銀の斧!' :
+        '当たりは金の斧!';
 
     resultMessage.textContent = '';
     let i = 0;
@@ -228,24 +215,6 @@ function createPrizeGrid(isGold, previewMode = false) {
 
         gridContainer.appendChild(item);
     });
-}
-
-// 景品選択処理
-function selectPrize(prize, isGold) {
-    prize.selected = true;
-    winSound.play();
-
-    const winScreen = isGold ? 'goldWinScreen' : 'silverWinScreen';
-    const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
-
-    winDisplay.innerHTML = `
-        <img src="${prize.image}" alt="当選景品">
-        <div class="prize-info">
-            <h2>景品番号 ${prize.id}</h2>
-        </div>
-    `;
-
-    showScreen(winScreen);
 }
 
 // 画面遷移ボタンのイベントリスナー設定
@@ -333,7 +302,7 @@ document.querySelectorAll('.axe').forEach(axe => {
     });
 });
 
-// 景品選択処理を更新
+// 景品選択処理
 function selectPrize(prize, isGold) {
     prize.selected = true;
     winSound.play();

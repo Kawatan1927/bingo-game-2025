@@ -27,17 +27,17 @@
         </div>
     </div>
 
-    <div id="axeScreen" class="screen">
-        <h1 class="screen-title">斧を選択してください</h1>
+    <div id="axeSelectionScreen" class="screen">
+        <h1 class="screen-title">Which choose?</h1>
         <div class="axe-container">
-            <div class="axe" data-axe="left">
-                <img src="images/axe-silhouette.png" alt="左の斧">
+            <div class="axe" data-axe="gold">
+                <img src="images/gold-axe.png" alt="金の斧">
             </div>
-            <div class="axe" data-axe="right">
-                <img src="images/axe-silhouette.png" alt="右の斧">
+            <div class="axe" data-axe="silver">
+                <img src="images/silver-axe.png" alt="銀の斧">
             </div>
         </div>
-        <p class="guide-text">ENTERキーで結果発表</p>
+        <button id="axeResultButton" class="small-button">結果発表</button>
         <button class="back-to-bingo-btn small-button">ビンゴに戻る</button>
     </div>
 
@@ -82,7 +82,6 @@
     </div>
 
     <audio id="drawSound" src="sounds/draw.mp3"></audio>
-    <audio id="axeSelectSound" src="sounds/axe_select.mp3"></audio>
     <audio id="resultSound" src="sounds/result.mp3"></audio>
     <audio id="winSound" src="sounds/win.mp3"></audio>
 

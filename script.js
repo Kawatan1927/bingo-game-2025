@@ -151,12 +151,63 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
     }
 })
 
+// 紙吹雪アニメーション共通パラメータ
+var confettiDefaultSettings = {
+    spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 30,
+};
+
+// 当たりが金の斧の時のパラメータ
+var goldSettings = {
+    colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8'],
+    origin: {
+        x: 0.27,
+        y: 0.55
+    }
+};
+
+// 当たりが銀の斧の時のパラメータ
+var silverSettings = {
+    colors: ['BDC3C9', 'E9EAEA', '979C9A', 'EEEEEE', '9EACB4'],
+    origin: {
+        x: 0.73,
+        y: 0.55
+    }
+};
+
+// 結果発表画面 紙吹雪アニメーション(canvas-confetti)
+function starShoot(colorSettings){
+    confetti({
+        ...confettiDefaultSettings,
+        ...colorSettings,
+        particleCount: 50,
+        scalar: 1.2,
+        shapes: ['star']
+    });
+
+    confetti({
+        ...confettiDefaultSettings,
+        ...colorSettings,
+        particleCount: 50,
+        scalar: 0.75,
+        shapes: ['circle']
+    });
+};
+
 // 斧選択結果の表示
 function showAxeResult() {
+const goldImg = document.getElementById('goldImg');
+const silverImg = document.getElementById('silverImg');
+
+    const resultFlag = Math.random();
+
     showScreen('resultScreen');
     const resultMessage = document.getElementById('resultMessage');
 
-    const message = Math.random() > 0.5 ?
+    const message = resultFlag > 0.5 ?
         '当たりは銀の斧!' :
         '当たりは金の斧!';
 
@@ -174,6 +225,22 @@ function showAxeResult() {
             }, 1000);
         }
     }, 50);
+
+    if(resultFlag > 0.5){
+        goldImg.setAttribute('class', 'dark');
+        silverImg.setAttribute('class', 'brite');
+        setTimeout(starShoot(silverSettings), 0);
+        setTimeout(starShoot(silverSettings), 200);
+        setTimeout(starShoot(silverSettings), 400);
+        setTimeout(starShoot(silverSettings), 600);
+    }else{
+        goldImg.setAttribute('class', 'brite');
+        silverImg.setAttribute('class', 'dark');
+        setTimeout(starShoot(goldSettings), 0);
+        setTimeout(starShoot(goldSettings), 200);
+        setTimeout(starShoot(goldSettings), 400);
+        setTimeout(starShoot(goldSettings), 600);
+    };
 }
 
 /**

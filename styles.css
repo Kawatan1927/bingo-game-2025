@@ -159,6 +159,47 @@ body, html {
     transform: scale(1.1);
 }
 
+/* 結果発表エリア */
+.result-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+    width: 100%;
+}
+
+.result {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    height: 30vh;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s;
+    width: 30vh;
+}
+
+.result img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+/* 明度調整 */
+#goldImg.brite {
+    filter: brightness(1.4);
+}
+#goldImg.dark {
+    filter: brightness(0.6);
+}
+
+#silverImg.brite {
+    filter: brightness(1.4);
+}
+#silverImg.dark {
+    filter: brightness(0.6);
+}
+  
 /* ガイドテキスト */
 .guide-text {
     animation: pulse 1s infinite;

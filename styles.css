@@ -187,14 +187,14 @@ body, html {
 
 /* 明度調整 */
 #goldImg.brite {
-    filter: brightness(1.4);
+    filter: brightness(1.1);
 }
 #goldImg.dark {
     filter: brightness(0.6);
 }
 
 #silverImg.brite {
-    filter: brightness(1.4);
+    filter: brightness(1.1);
 }
 #silverImg.dark {
     filter: brightness(0.6);

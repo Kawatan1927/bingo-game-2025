@@ -30,12 +30,13 @@
       "icon": "assets/win/bingo.ico",
       "target": "nsis"
     },
-    "nsis" :{
+    "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     }
   },
   "devDependencies": {
+    "canvas-confetti": "^1.9.3",
     "electron": "^33.2.1",
     "electron-builder": "^25.1.8"
   }

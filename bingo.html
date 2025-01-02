@@ -44,7 +44,15 @@
     <div id="resultScreen" class="screen">
         <h1 class="screen-title">結果発表</h1>
         <div id="resultMessage" class="result-text"></div>
-        <button id="toSilverButton" class="small-button">銀の斧の景品選択へ</button>
+        <div class="result-container">
+            <div class="result">
+                <img id="goldImg" src="images/gold-axe.png" alt="金の斧">
+            </div>
+            <div class="result">
+                <img id="silverImg" src="images/silver-axe.png" alt="銀の斧">
+            </div>
+        </div>
+        <button id="toSilverButton" class="small-button">プレミアム景品選択へ</button>
     </div>
 
     <div id="silverPrizeScreen" class="screen">
@@ -86,5 +94,6 @@
     <audio id="winSound" src="sounds/win.mp3"></audio>
 
     <script src="script.js"></script>
+    <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
 </body>
 </html>

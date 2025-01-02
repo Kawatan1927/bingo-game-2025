@@ -3,6 +3,7 @@ let bingoNumbers = [];
 let calledNumbers = [];
 let drawingCount = 0;
 let currentScreen = 'bingoScreen';
+let isFullscreen = false;
 
 // 音声エフェクト
 const drawSound = document.getElementById('drawSound');
@@ -26,10 +27,14 @@ const prizes = {
 
 // 全画面表示の管理
 document.getElementById('fullscreenBtn').addEventListener('click', () => {
-    if (!document.fullscreenElement) {
+    if (!isFullscreen) {
         document.documentElement.requestFullscreen();
-        document.getElementById('fullscreenBtn').style.display = 'none';
     }
+});
+
+document.addEventListener('fullscreenchange', () => {
+    isFullscreen = !!document.fullscreenElement;
+    document.getElementById('fullscreenBtn').style.display = isFullscreen ? 'none' : 'block';
 });
 
 // ESCキーでの全画面解除を防ぐ
@@ -247,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 画面の初期化
-// 画面の初期化
 function initializeScreen() {
     [drawSound, axeSelectSound, resultSound, winSound].forEach(sound => {
         sound.load();
@@ -257,6 +261,10 @@ function initializeScreen() {
     createPrizeGrid(false);
 
     showScreen('bingoScreen');
+    
+    // 全画面ボタンの表示状態を初期化
+    isFullscreen = !!document.fullscreenElement;
+    document.getElementById('fullscreenBtn').style.display = isFullscreen ? 'none' : 'block';
 }
 
 // 画面読み込み時の初期化
@@ -292,7 +300,7 @@ function enhancePrizeSelection(prize) {
     prize.classList.add('selected');
 }
 
-// 斧選択のイベントリスナーを更新
+// 斧選択のイベントリスナー
 document.querySelectorAll('.axe').forEach(axe => {
     axe.addEventListener('click', () => {
         document.querySelectorAll('.axe').forEach(a => a.classList.remove('selected'));
@@ -319,4 +327,42 @@ function selectPrize(prize, isGold) {
 
     showScreen(winScreen);
     enhancePrizeSelection(winDisplay);
+
+    if (isGold) {
+        checkLastOnePrize();
+    }
+}
+
+// ラストワン賞画面処理
+function checkLastOnePrize() {
+    const allSelected = prizes.gold.every(prize => prize.selected) && prizes.silver.every(prize => prize.selected);
+    const toLastOnePrizeButton = document.getElementById('toLastOnePrizeButton');
+    const backToBingoButton = document.getElementById('backToBingoFromGoldWin');
+    
+    if (allSelected) {
+        toLastOnePrizeButton.style.display = 'block';
+        backToBingoButton.style.display = 'none';
+    } else {
+        toLastOnePrizeButton.style.display = 'none';
+        backToBingoButton.style.display = 'block';
+    }
+}
+
+document.getElementById('toLastOnePrizeButton').addEventListener('click', () => {
+    showScreen('lastOnePrizeScreen');
+    createFireworks();
+});
+
+//花火演出
+function createFireworks() {
+    for (let i = 0; i < 50; i++) {
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.setProperty('--tx', `${Math.random() * 200 - 100}px`);
+        firework.style.setProperty('--ty', `${Math.random() * 200 - 100}px`);
+        firework.style.left = `${Math.random() * 100}%`;
+        firework.style.top = `${Math.random() * 100}%`;
+        firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.getElementById('lastOnePrizeScreen').appendChild(firework);
+    }
 }

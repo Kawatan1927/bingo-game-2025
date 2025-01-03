@@ -69,7 +69,12 @@ window.onload = function () {
     console.log(bingoNumbers);
 };
 
-// a~zまでの連番配列作成関数
+/**
+ * a~zまでの連番配列を生成する関数
+ * @param {number} a - 開始番号
+ * @param {number} z - 終了番号
+ * @returns {number[]} - 連番配列
+ */
 const forRange = (a, z) => {
     var lst = [];
     for (let i = a; i <= z; i++) {
@@ -78,7 +83,11 @@ const forRange = (a, z) => {
     return lst
 }
 
-// 配列シャッフル関数(Fisher-Yate Shuffle)
+/**
+ * 配列シャッフル関数(Fisher-Yate Shuffle)
+ * @param {number[]} numberArray - シャッフルする配列
+ * @returns {number[]} - シャッフルされた配列
+ */
 function fisherYateShuffle(numberArray) {
     for (i = numberArray.length - 1; i > 0; i--) {
         r = Math.floor(Math.random() * (i + 1));
@@ -89,7 +98,10 @@ function fisherYateShuffle(numberArray) {
     return numberArray;
 };
 
-// 画面遷移
+/**
+ * 画面遷移を制御する関数
+ * @param {string} screenId - 遷移先の画面ID
+ */
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
@@ -130,7 +142,10 @@ document.getElementById('drawButton').addEventListener('click', () => {
     }, 5000);
 });
 
-// 数字めくりアニメーション
+/**
+ * 数字めくりアニメーション
+ * @param {number} targetNumber - 表示する番号
+ */
 function animateNumber(targetNumber) {
     const currentNumber = document.getElementById('currentNumber');
     let count = 0;
@@ -151,7 +166,9 @@ function animateNumber(targetNumber) {
     }, interval);
 }
 
-// 履歴更新
+/**
+ * ビンゴ番号履歴を更新する関数
+ */
 function updateHistory() {
     const history = document.getElementById('numberHistory');
     history.innerHTML = '';
@@ -202,7 +219,10 @@ var silverSettings = {
     }
 };
 
-// 結果発表画面 紙吹雪アニメーション(canvas-confetti)
+/**
+ * 結果発表画面 紙吹雪アニメーション(canvas-confetti)
+ * @param {Object} colorSettings - 紙吹雪の色設定
+ */
 function starShoot(colorSettings){
     confetti({
         ...confettiDefaultSettings,
@@ -221,7 +241,9 @@ function starShoot(colorSettings){
     });
 };
 
-// 斧選択結果の表示
+/**
+ * 斧選択結果の表示
+ */
 function showAxeResult() {
 const goldImg = document.getElementById('goldImg');
 const silverImg = document.getElementById('silverImg');
@@ -245,7 +267,7 @@ const silverImg = document.getElementById('silverImg');
             clearInterval(typeInterval);
             resultSound.play();
             setTimeout(() => {
-                document.getElementById('toSilverButton').style.display = 'block';
+                document.getElementById('toStandardPrizeButton').style.display = 'block';
             }, 1000);
         }
     }, 50);
@@ -270,13 +292,13 @@ const silverImg = document.getElementById('silverImg');
 /**
  * 景品一覧画面をグリッドレイアウトで生成する
  *
- * @param isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
- * @param previewMode - プレビューモードの場合はtrue
+ * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
+ * @param {boolean} previewMode - プレビューモードの場合はtrue
  */
 function createPrizeGrid(isGold, previewMode = false) {
     const gridId = previewMode
-        ? (isGold ? 'goldPreviewGrid' : 'silverPreviewGrid')
-        : (isGold ? 'goldPrizeGrid' : 'silverPrizeGrid');
+        ? (isGold ? 'premiumPreviewGrid' : 'standardPreviewGrid')
+        : (isGold ? 'premiumPrizeGrid' : 'standardPrizeGrid');
 
     const gridContainer = document.getElementById(gridId);
     const prizeList = isGold ? prizes.gold : prizes.silver;
@@ -311,23 +333,23 @@ function createPrizeGrid(isGold, previewMode = false) {
 
 // 画面遷移ボタンのイベントリスナー設定
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('toSilverButton').addEventListener('click', () => {
-        showScreen('silverPrizeScreen');
+    document.getElementById('toStandardPrizeButton').addEventListener('click', () => {
+        showScreen('standardPrizeScreen');
         createPrizeGrid(false);
     });
 
-    document.getElementById('toGoldButton').addEventListener('click', () => {
-        showScreen('goldPrizeScreen');
+    document.getElementById('toPremiumPrizeButton').addEventListener('click', () => {
+        showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
     });
 
-    document.getElementById('previewGoldButton').addEventListener('click', () => {
-        showScreen('goldPreviewScreen');
+    document.getElementById('previewPremiumPrizeButton').addEventListener('click', () => {
+        showScreen('premiumPreviewScreen');
         createPrizeGrid(true, true);
     });
 
-    document.getElementById('previewSilverButton').addEventListener('click', () => {
-        showScreen('silverPreviewScreen');
+    document.getElementById('previewStandardPrizeButton').addEventListener('click', () => {
+        showScreen('standardPreviewScreen');
         createPrizeGrid(false, true);
     });
 
@@ -338,8 +360,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 画面の初期化
-// 画面の初期化
+
+/**
+ * 画面の初期化処理を行う関数
+ * ※画面読み込み時に使用
+ */
 function initializeScreen() {
     [drawSound, axeSelectSound, resultSound, winSound].forEach(sound => {
         sound.load();
@@ -367,19 +392,28 @@ window.addEventListener('resize', () => {
     }
 });
 
-// ビンゴ番号抽選時の演出
+/**
+ * ビンゴ番号抽選時の演出
+ * @param {number} number - 抽選された番号
+ */
 function enhanceDrawAnimation(number) {
     const currentNumber = document.getElementById('currentNumber');
     currentNumber.classList.add('highlight');
     setTimeout(() => currentNumber.classList.remove('highlight'), 2000);
 }
 
-// 斧選択時の演出
+/**
+ * 斧選択時の演出
+ * @param {HTMLElement} axe - 選択された斧の要素
+ */
 function enhanceAxeSelection(axe) {
     axe.classList.add('selected');
 }
 
-// 景品選択時の演出
+/**
+ * 景品選択時の演出
+ * @param {HTMLElement} prize - 選択された景品の要素
+ */
 function enhancePrizeSelection(prize) {
     prize.classList.add('selected');
 }
@@ -394,12 +428,16 @@ document.querySelectorAll('.axe').forEach(axe => {
     });
 });
 
-// 景品選択処理
+/**
+ * 景品選択処理
+ * @param {Object} prize - 選択された景品
+ * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
+ */
 function selectPrize(prize, isGold) {
     prize.selected = true;
     winSound.play();
 
-    const winScreen = isGold ? 'goldWinScreen' : 'silverWinScreen';
+    const winScreen = isGold ? 'premiumWinScreen' : 'standardWinScreen';
     const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
 
     winDisplay.innerHTML = `

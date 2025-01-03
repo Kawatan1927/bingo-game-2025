@@ -228,7 +228,7 @@ function createPrizeGrid(isGold, previewMode = false) {
 
         const number = document.createElement('div');
         number.className = 'prize-number';
-        number.textContent = prize.id + ":" + prize.name;
+        number.textContent = prize.id + "：" + prize.name;
 
 
         item.appendChild(img);

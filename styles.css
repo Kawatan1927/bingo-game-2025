@@ -119,6 +119,7 @@ body, html {
     margin: 5px;
     width: 70px;
 }
+
 /* ボタンレイアウト */
 .button-grid {
     display: grid;
@@ -207,11 +208,15 @@ body, html {
     background: rgba(0, 0, 0, 0.8);
     bottom: 0;
     color: #FFD700;
-    font-size: 2.5vh;
+    font-size: 2.3vh;
     padding: 10px;
     position: absolute;
     text-align: center;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .prize-item:hover {

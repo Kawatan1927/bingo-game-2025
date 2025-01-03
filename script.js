@@ -12,16 +12,40 @@ const winSound = document.getElementById('winSound');
 
 // 景品データ
 const prizes = {
-    gold: Array.from({length: 15}, (_, i) => ({
-        id: i + 16,
-        image: `images/gold-prize-${i + 1}.jpg`,
-        selected: false
-    })),
-    silver: Array.from({length: 15}, (_, i) => ({
-        id: i + 1,
-        image: `images/silver-prize-${i + 1}.jpg`,
-        selected: false
-    }))
+    gold: [
+        { id: 16, name: 'iPad', image: 'images/gold-prize-1.jpg', selected: false },
+        { id: 17, name: 'チェア', image: 'images/gold-prize-2.jpg', selected: false },
+        { id: 18, name: 'Bluetooth ヘッドホン', image: 'images/gold-prize-3.jpg', selected: false },
+        { id: 19, name: 'コーヒーメーカー', image: 'images/gold-prize-4.jpg', selected: false },
+        { id: 20, name: 'ゲーミングモニター', image: 'images/gold-prize-5.jpg', selected: false },
+        { id: 21, name: '水なし自動調理鍋', image: 'images/gold-prize-6.jpg', selected: false },
+        { id: 22, name: '除湿機', image: 'images/gold-prize-7.jpg', selected: false },
+        { id: 23, name: 'オーブンレンジ', image: 'images/gold-prize-8.jpg', selected: false },
+        { id: 24, name: 'ワイヤレスイヤホン', image: 'images/gold-prize-9.jpg', selected: false },
+        { id: 25, name: 'Dyson 掃除機', image: 'images/gold-prize-10.jpg', selected: false },
+        { id: 26, name: 'ReFaヘッドマッサージ', image: 'images/gold-prize-11.jpg', selected: false },
+        { id: 27, name: 'Wi-Fiルーター', image: 'images/gold-prize-12.jpg', selected: false },
+        { id: 28, name: 'ReFa シャワーヘッド', image: 'images/gold-prize-13.jpg', selected: false },
+        { id: 29, name: 'Nintendo Switch Lite', image: 'images/gold-prize-14.jpg', selected: false },
+        { id: 30, name: 'ドライヤー', image: 'images/gold-prize-15.jpg', selected: false },
+    ],
+    silver: [
+        { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false },
+        { id: 2, name: '百黙 純米大吟醸', image: 'images/silver-prize-2.jpg', selected: false },
+        { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false },
+        { id: 4, name: '魚沼産こしひかり 10kg', image: 'images/silver-prize-4.jpg', selected: false },
+        { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false },
+        { id: 6, name: '加湿器', image: 'images/silver-prize-6.jpg', selected: false },
+        { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false },
+        { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false },
+        { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false },
+        { id: 10, name: 'ザ･プレミアム･モルツ', image: 'images/silver-prize-10.jpg', selected: false },
+        { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false },
+        { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false },
+        { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false },
+        { id: 14, name: 'サウナハット', image: 'images/silver-prize-14.jpg', selected: false },
+        { id: 15, name: '缶詰おつまみ 3缶セット', image: 'images/silver-prize-15.jpg', selected: false },
+    ],
 };
 
 // 全画面表示の管理
@@ -271,7 +295,8 @@ function createPrizeGrid(isGold, previewMode = false) {
 
         const number = document.createElement('div');
         number.className = 'prize-number';
-        number.textContent = prize.id;
+        number.textContent = prize.id + "：" + prize.name;
+
 
         item.appendChild(img);
         item.appendChild(number);
@@ -381,6 +406,7 @@ function selectPrize(prize, isGold) {
         <img src="${prize.image}" alt="当選景品">
         <div class="prize-info">
             <h2>景品番号 ${prize.id}</h2>
+            <h2>${prize.name}</h2>
         </div>
     `;
 

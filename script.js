@@ -3,6 +3,14 @@ let bingoNumbers = [];
 let calledNumbers = [];
 let drawingCount = 0;
 let currentScreen = 'bingoScreen';
+let animationLength;
+let animationLengthMin = 1000; // アニメーション長最小値
+let animationLengthMax = 10000; // アニメーション長最大値
+
+// メインプロセスから設定ファイルの値を受信およびキャスト
+window.api.on("settings", (arg) => {
+    animationLength = parseInt(arg.animationLength);
+});
 
 // 音声エフェクト
 const drawSound = document.getElementById('drawSound');
@@ -24,6 +32,9 @@ const prizes = {
     }))
 };
 
+// アニメーション長設定欄
+const inputAnimationLength = document.getElementById("animationLength");
+
 // 全画面表示の管理
 document.getElementById('fullscreenBtn').addEventListener('click', () => {
     if (!document.fullscreenElement) {
@@ -39,10 +50,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// 起動時にビンゴ番号配列を生成する
+// 起動時処理(ビンゴ番号配列の生成、設定ファイルの値を設定欄に表示)
 window.onload = function () {
     bingoNumbers = fisherYateShuffle(forRange(1, 75));
     console.log(bingoNumbers);
+
+    inputAnimationLength.value = animationLength;
 };
 
 // a~zまでの連番配列作成関数
@@ -103,14 +116,14 @@ document.getElementById('drawButton').addEventListener('click', () => {
             button.style.opacity = '1';
         });
         enhanceDrawAnimation(number);
-    }, 5000);
+    }, animationLength);
 });
 
 // 数字めくりアニメーション
 function animateNumber(targetNumber) {
     const currentNumber = document.getElementById('currentNumber');
     let count = 0;
-    const duration = 5000; // 5秒間
+    const duration = animationLength; // 5秒間
     const interval = 50; // 50ミリ秒ごとに更新
     const steps = duration / interval;
 
@@ -386,4 +399,41 @@ function selectPrize(prize, isGold) {
 
     showScreen(winScreen);
     enhancePrizeSelection(winDisplay);
+}
+
+// 設定値入力欄制御用変数
+const modal = document.querySelector('.js-modal');
+const modalButton = document.querySelector('.js-modal-button');
+const modalComplete = document.querySelector('.js-complete-button');
+const modalClose = document.querySelector('.js-close-button');
+
+// 設定ボタン押下時イベント
+modalButton.addEventListener('click', () => {
+    modal.classList.add('is-open');
+});
+
+// 設定完了ボタン押下時イベント
+modalComplete.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+    animationLength = inputValueCheck(inputAnimationLength.value);
+    window.api.send("update_animation_length", animationLength);
+});
+
+// キャンセルボタン押下時イベント
+modalClose.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+    inputAnimationLength.value = animationLength;
+});
+
+// アニメーション長の入力値チェック(1000ms~10000msに強制)
+function inputValueCheck(inputValue) {
+    if(inputValue < animationLengthMin){
+        inputAnimationLength.value = animationLengthMin;
+        return animationLengthMin;
+    }else if(inputValue > animationLengthMax){
+        inputAnimationLength.value = animationLengthMax;
+        return animationLengthMax;
+    }else{
+        return inputValue;
+    };
 }

@@ -66,6 +66,127 @@ body, html {
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
+/* 設定ボタン */
+.setting-button-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.settings-button {
+    opacity: 0;
+}
+
+.settings-button:hover {
+    opacity: 1;
+}
+
+/* グレー背景 */
+.layer {
+    background: rgba(255, 255, 255, .2);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .7s linear, visibility .7s linear, z-index .7s linear;
+}
+
+.layer.is-open {
+    z-index: 999;
+    opacity: 1;
+    visibility: visible;
+}
+
+.layer.layer.is-open .modal {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* モーダルコンテンツ */
+.modal {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    width: 30%;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility .4s linear, opacity .4s linear;
+}
+
+.modal-inner {
+    margin-top: 125px;
+    margin-bottom: 125px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 13px;
+    display: block;
+    padding: 21px 8px 21px;
+    height: auto;
+}
+
+.modal-content {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.setting-header {
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+.setting-form-number {
+    height: 2.4em;
+    width: 50%;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 16px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 1px #ccc inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.setting-form-number:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150,243) inset;
+}
+
+.setting-form-button {
+    display: inline-block;
+    width: 40%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.setting-form-button:hover {
+    background-color: #333;
+}
+
+.setting-form-button:focus {
+    outline: 0;
+    background-color: #000;
+    border: 2px solid rgb(33, 150, 243);
+}
+
 /* 画面タイトル */
 .screen-title {
     color: #FFD700;

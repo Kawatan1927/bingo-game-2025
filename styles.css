@@ -119,6 +119,7 @@ body, html {
     margin: 5px;
     width: 70px;
 }
+
 /* ボタンレイアウト */
 .button-grid {
     display: grid;
@@ -159,6 +160,47 @@ body, html {
     transform: scale(1.1);
 }
 
+/* 結果発表エリア */
+.result-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+    width: 100%;
+}
+
+.result {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    height: 30vh;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s;
+    width: 30vh;
+}
+
+.result img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+/* 明度調整 */
+#goldImg.brite {
+    filter: brightness(1.1);
+}
+#goldImg.dark {
+    filter: brightness(0.6);
+}
+
+#silverImg.brite {
+    filter: brightness(1.1);
+}
+#silverImg.dark {
+    filter: brightness(0.6);
+}
+  
 /* ガイドテキスト */
 .guide-text {
     animation: pulse 1s infinite;
@@ -207,11 +249,15 @@ body, html {
     background: rgba(0, 0, 0, 0.8);
     bottom: 0;
     color: #FFD700;
-    font-size: 2.5vh;
+    font-size: 2.3vh;
     padding: 10px;
     position: absolute;
     text-align: center;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .prize-item:hover {

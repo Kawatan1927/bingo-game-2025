@@ -13,16 +13,40 @@ const winSound = document.getElementById('winSound');
 
 // 景品データ
 const prizes = {
-    gold: Array.from({length: 15}, (_, i) => ({
-        id: i + 16,
-        image: `images/gold-prize-${i + 1}.jpg`,
-        selected: false
-    })),
-    silver: Array.from({length: 15}, (_, i) => ({
-        id: i + 1,
-        image: `images/silver-prize-${i + 1}.jpg`,
-        selected: false
-    }))
+    gold: [
+        { id: 16, name: 'iPad', image: 'images/gold-prize-1.jpg', selected: false },
+        { id: 17, name: 'チェア', image: 'images/gold-prize-2.jpg', selected: false },
+        { id: 18, name: 'Bluetooth ヘッドホン', image: 'images/gold-prize-3.jpg', selected: false },
+        { id: 19, name: 'コーヒーメーカー', image: 'images/gold-prize-4.jpg', selected: false },
+        { id: 20, name: 'ゲーミングモニター', image: 'images/gold-prize-5.jpg', selected: false },
+        { id: 21, name: '水なし自動調理鍋', image: 'images/gold-prize-6.jpg', selected: false },
+        { id: 22, name: '除湿機', image: 'images/gold-prize-7.jpg', selected: false },
+        { id: 23, name: 'オーブンレンジ', image: 'images/gold-prize-8.jpg', selected: false },
+        { id: 24, name: 'ワイヤレスイヤホン', image: 'images/gold-prize-9.jpg', selected: false },
+        { id: 25, name: 'Dyson 掃除機', image: 'images/gold-prize-10.jpg', selected: false },
+        { id: 26, name: 'ReFaヘッドマッサージ', image: 'images/gold-prize-11.jpg', selected: false },
+        { id: 27, name: 'Wi-Fiルーター', image: 'images/gold-prize-12.jpg', selected: false },
+        { id: 28, name: 'ReFa シャワーヘッド', image: 'images/gold-prize-13.jpg', selected: false },
+        { id: 29, name: 'Nintendo Switch Lite', image: 'images/gold-prize-14.jpg', selected: false },
+        { id: 30, name: 'ドライヤー', image: 'images/gold-prize-15.jpg', selected: false },
+    ],
+    silver: [
+        { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false },
+        { id: 2, name: '百黙 純米大吟醸', image: 'images/silver-prize-2.jpg', selected: false },
+        { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false },
+        { id: 4, name: '魚沼産こしひかり 10kg', image: 'images/silver-prize-4.jpg', selected: false },
+        { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false },
+        { id: 6, name: '加湿器', image: 'images/silver-prize-6.jpg', selected: false },
+        { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false },
+        { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false },
+        { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false },
+        { id: 10, name: 'ザ･プレミアム･モルツ', image: 'images/silver-prize-10.jpg', selected: false },
+        { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false },
+        { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false },
+        { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false },
+        { id: 14, name: 'サウナハット', image: 'images/silver-prize-14.jpg', selected: false },
+        { id: 15, name: '缶詰おつまみ 3缶セット', image: 'images/silver-prize-15.jpg', selected: false },
+    ],
 };
 
 // 全画面表示の管理
@@ -50,7 +74,12 @@ window.onload = function () {
     console.log(bingoNumbers);
 };
 
-// a~zまでの連番配列作成関数
+/**
+ * a~zまでの連番配列を生成する関数
+ * @param {number} a - 開始番号
+ * @param {number} z - 終了番号
+ * @returns {number[]} - 連番配列
+ */
 const forRange = (a, z) => {
     var lst = [];
     for (let i = a; i <= z; i++) {
@@ -59,7 +88,11 @@ const forRange = (a, z) => {
     return lst
 }
 
-// 配列シャッフル関数(Fisher-Yate Shuffle)
+/**
+ * 配列シャッフル関数(Fisher-Yate Shuffle)
+ * @param {number[]} numberArray - シャッフルする配列
+ * @returns {number[]} - シャッフルされた配列
+ */
 function fisherYateShuffle(numberArray) {
     for (i = numberArray.length - 1; i > 0; i--) {
         r = Math.floor(Math.random() * (i + 1));
@@ -70,7 +103,10 @@ function fisherYateShuffle(numberArray) {
     return numberArray;
 };
 
-// 画面遷移
+/**
+ * 画面遷移を制御する関数
+ * @param {string} screenId - 遷移先の画面ID
+ */
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
@@ -111,7 +147,10 @@ document.getElementById('drawButton').addEventListener('click', () => {
     }, 5000);
 });
 
-// 数字めくりアニメーション
+/**
+ * 数字めくりアニメーション
+ * @param {number} targetNumber - 表示する番号
+ */
 function animateNumber(targetNumber) {
     const currentNumber = document.getElementById('currentNumber');
     let count = 0;
@@ -132,7 +171,9 @@ function animateNumber(targetNumber) {
     }, interval);
 }
 
-// 履歴更新
+/**
+ * ビンゴ番号履歴を更新する関数
+ */
 function updateHistory() {
     const history = document.getElementById('numberHistory');
     history.innerHTML = '';
@@ -156,12 +197,68 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
     }
 })
 
-// 斧選択結果の表示
+// 紙吹雪アニメーション共通パラメータ
+var confettiDefaultSettings = {
+    spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 30,
+};
+
+// 当たりが金の斧の時のパラメータ
+var goldSettings = {
+    colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8'],
+    origin: {
+        x: 0.27,
+        y: 0.55
+    }
+};
+
+// 当たりが銀の斧の時のパラメータ
+var silverSettings = {
+    colors: ['BDC3C9', 'E9EAEA', '979C9A', 'EEEEEE', '9EACB4'],
+    origin: {
+        x: 0.73,
+        y: 0.55
+    }
+};
+
+/**
+ * 結果発表画面 紙吹雪アニメーション(canvas-confetti)
+ * @param {Object} colorSettings - 紙吹雪の色設定
+ */
+function starShoot(colorSettings){
+    confetti({
+        ...confettiDefaultSettings,
+        ...colorSettings,
+        particleCount: 50,
+        scalar: 1.2,
+        shapes: ['star']
+    });
+
+    confetti({
+        ...confettiDefaultSettings,
+        ...colorSettings,
+        particleCount: 50,
+        scalar: 0.75,
+        shapes: ['circle']
+    });
+};
+
+/**
+ * 斧選択結果の表示
+ */
 function showAxeResult() {
+const goldImg = document.getElementById('goldImg');
+const silverImg = document.getElementById('silverImg');
+
+    const resultFlag = Math.random();
+
     showScreen('resultScreen');
     const resultMessage = document.getElementById('resultMessage');
 
-    const message = Math.random() > 0.5 ?
+    const message = resultFlag > 0.5 ?
         '当たりは銀の斧!' :
         '当たりは金の斧!';
 
@@ -175,22 +272,38 @@ function showAxeResult() {
             clearInterval(typeInterval);
             resultSound.play();
             setTimeout(() => {
-                document.getElementById('toSilverButton').style.display = 'block';
+                document.getElementById('toStandardPrizeButton').style.display = 'block';
             }, 1000);
         }
     }, 50);
+
+    if(resultFlag > 0.5){
+        goldImg.setAttribute('class', 'dark');
+        silverImg.setAttribute('class', 'brite');
+        setTimeout(starShoot(silverSettings), 0);
+        setTimeout(starShoot(silverSettings), 200);
+        setTimeout(starShoot(silverSettings), 400);
+        setTimeout(starShoot(silverSettings), 600);
+    }else{
+        goldImg.setAttribute('class', 'brite');
+        silverImg.setAttribute('class', 'dark');
+        setTimeout(starShoot(goldSettings), 0);
+        setTimeout(starShoot(goldSettings), 200);
+        setTimeout(starShoot(goldSettings), 400);
+        setTimeout(starShoot(goldSettings), 600);
+    };
 }
 
 /**
  * 景品一覧画面をグリッドレイアウトで生成する
  *
- * @param isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
- * @param previewMode - プレビューモードの場合はtrue
+ * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
+ * @param {boolean} previewMode - プレビューモードの場合はtrue
  */
 function createPrizeGrid(isGold, previewMode = false) {
     const gridId = previewMode
-        ? (isGold ? 'goldPreviewGrid' : 'silverPreviewGrid')
-        : (isGold ? 'goldPrizeGrid' : 'silverPrizeGrid');
+        ? (isGold ? 'premiumPreviewGrid' : 'standardPreviewGrid')
+        : (isGold ? 'premiumPrizeGrid' : 'standardPrizeGrid');
 
     const gridContainer = document.getElementById(gridId);
     const prizeList = isGold ? prizes.gold : prizes.silver;
@@ -209,7 +322,8 @@ function createPrizeGrid(isGold, previewMode = false) {
 
         const number = document.createElement('div');
         number.className = 'prize-number';
-        number.textContent = prize.id;
+        number.textContent = prize.id + "：" + prize.name;
+
 
         item.appendChild(img);
         item.appendChild(number);
@@ -224,23 +338,23 @@ function createPrizeGrid(isGold, previewMode = false) {
 
 // 画面遷移ボタンのイベントリスナー設定
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('toSilverButton').addEventListener('click', () => {
-        showScreen('silverPrizeScreen');
+    document.getElementById('toStandardPrizeButton').addEventListener('click', () => {
+        showScreen('standardPrizeScreen');
         createPrizeGrid(false);
     });
 
-    document.getElementById('toGoldButton').addEventListener('click', () => {
-        showScreen('goldPrizeScreen');
+    document.getElementById('toPremiumPrizeButton').addEventListener('click', () => {
+        showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
     });
 
-    document.getElementById('previewGoldButton').addEventListener('click', () => {
-        showScreen('goldPreviewScreen');
+    document.getElementById('previewPremiumPrizeButton').addEventListener('click', () => {
+        showScreen('premiumPreviewScreen');
         createPrizeGrid(true, true);
     });
 
-    document.getElementById('previewSilverButton').addEventListener('click', () => {
-        showScreen('silverPreviewScreen');
+    document.getElementById('previewStandardPrizeButton').addEventListener('click', () => {
+        showScreen('standardPreviewScreen');
         createPrizeGrid(false, true);
     });
 
@@ -251,7 +365,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 画面の初期化
+/**
+ * 画面の初期化処理を行う関数
+ * ※画面読み込み時に使用
+ */
 function initializeScreen() {
     [drawSound, axeSelectSound, resultSound, winSound].forEach(sound => {
         sound.load();
@@ -283,19 +400,28 @@ window.addEventListener('resize', () => {
     }
 });
 
-// ビンゴ番号抽選時の演出
+/**
+ * ビンゴ番号抽選時の演出
+ * @param {number} number - 抽選された番号
+ */
 function enhanceDrawAnimation(number) {
     const currentNumber = document.getElementById('currentNumber');
     currentNumber.classList.add('highlight');
     setTimeout(() => currentNumber.classList.remove('highlight'), 2000);
 }
 
-// 斧選択時の演出
+/**
+ * 斧選択時の演出
+ * @param {HTMLElement} axe - 選択された斧の要素
+ */
 function enhanceAxeSelection(axe) {
     axe.classList.add('selected');
 }
 
-// 景品選択時の演出
+/**
+ * 景品選択時の演出
+ * @param {HTMLElement} prize - 選択された景品の要素
+ */
 function enhancePrizeSelection(prize) {
     prize.classList.add('selected');
 }
@@ -310,18 +436,23 @@ document.querySelectorAll('.axe').forEach(axe => {
     });
 });
 
-// 景品選択処理
+/**
+ * 景品選択処理
+ * @param {Object} prize - 選択された景品
+ * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
+ */
 function selectPrize(prize, isGold) {
     prize.selected = true;
     winSound.play();
 
-    const winScreen = isGold ? 'goldWinScreen' : 'silverWinScreen';
+    const winScreen = isGold ? 'premiumWinScreen' : 'standardWinScreen';
     const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
 
     winDisplay.innerHTML = `
         <img src="${prize.image}" alt="当選景品">
         <div class="prize-info">
             <h2>景品番号 ${prize.id}</h2>
+            <h2>${prize.name}</h2>
         </div>
     `;
 

@@ -74,7 +74,8 @@
     <div id="premiumWinScreen" class="screen">
         <h1 class="screen-title">おめでとうございます！</h1>
         <div id="goldWinDisplay" class="win-display"></div>
-        <button class="back-to-bingo-btn small-button">ビンゴに戻る</button>
+        <button id="toLastOnePrizeButton" class="small-button" style="display: none;">ラストワン賞へ</button>
+        <button id="backToBingoFromGoldWin" class="small-button back-to-bingo-btn">ビンゴに戻る</button>
     </div>
 
     <div id="premiumPreviewScreen" class="screen">
@@ -87,6 +88,14 @@
         <h1 class="screen-title">スタンダード景品一覧</h1>
         <div id="standardPreviewGrid" class="prize-grid"></div>
         <button class="back-to-bingo-btn small-button">ビンゴに戻る</button>
+    </div>
+
+    <div id="lastOnePrizeScreen" class="screen">
+        <h1 class="screen-title">ラストワン賞</h1>
+        <div id="lastOnePrizeDisplay" class="win-display">
+            <img src="images/last-one-prize.jpg" alt="ラストワン賞">
+        </div>
+        <h1>JTBプレミアムギフトカタログ</h1>
     </div>
 
     <audio id="drawSound" src="sounds/draw.mp3"></audio>

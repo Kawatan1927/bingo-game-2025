@@ -364,8 +364,9 @@ body, html {
     animation: firework 1s ease-out forwards;
     border-radius: 50%;
     height: 5px;
-    position: absolute;
+    position: fixed;
     width: 5px;
+    z-index: 1000;
 }
 
 @keyframes firework {
@@ -421,5 +422,46 @@ body, html {
     .prize-grid {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(5, 1fr);
+    }
+}
+
+#lastOnePrizeScreen {
+    background: linear-gradient(45deg, #4a0000, #8a0000);
+}
+
+#lastOnePrizeDisplay img {
+    max-width: 80%;
+    max-height: 60vh;
+    object-fit: contain;
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: firework 1s ease-out forwards;
+}
+
+@keyframes firework {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty));
+        opacity: 0;
     }
 }

@@ -201,6 +201,11 @@ function updateHistory() {
 // 斧選択画面への移動
 document.getElementById('toAxeButton').addEventListener('click', () => {
     showScreen('axeSelectionScreen');
+    anime({
+        targets: '#axeSelectionScreen',
+        scale: [0.3, 1],
+        duration: 1500
+    })
 });
 
 // 結果発表ボタンクリックで結果表示
@@ -272,8 +277,8 @@ const silverImg = document.getElementById('silverImg');
     const resultMessage = document.getElementById('resultMessage');
 
     const message = resultFlag > 0.5 ?
-        '当たりは銀の斧!' :
-        '当たりは金の斧!';
+        'プレミアム景品は銀の斧!' :
+        'プレミアム景品は金の斧!';
 
     resultMessage.textContent = '';
     let i = 0;
@@ -324,6 +329,7 @@ function createPrizeGrid(isGold, previewMode = false) {
     gridContainer.innerHTML = '';
     prizeList.forEach(prize => {
         const item = document.createElement('div');
+        item.setAttribute("id", "prize");
         item.className = `prize-item ${prize.selected ? 'selected' : ''}`;
         if (previewMode) {
             item.classList.add('preview');
@@ -342,7 +348,7 @@ function createPrizeGrid(isGold, previewMode = false) {
         item.appendChild(number);
 
         if (!prize.selected && !previewMode) {
-            item.addEventListener('click', () => selectPrize(prize, isGold));
+            item.addEventListener('click', () => displayConfirmWindow(prize, isGold));
         }
 
         gridContainer.appendChild(item);
@@ -354,21 +360,55 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toStandardPrizeButton').addEventListener('click', () => {
         showScreen('standardPrizeScreen');
         createPrizeGrid(false);
+        anime({
+            targets: '#prize',
+            rotateY: -360,
+            duration: 3000,
+            easing: 'spring(1, 80, 10, 0)'
+        })
     });
 
     document.getElementById('toPremiumPrizeButton').addEventListener('click', () => {
         showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
+        anime({
+            targets: '#prize',
+            rotateY: 360,
+            duration: 3000,
+            easing: 'spring(1, 80, 10, 0)'
+        })
     });
 
     document.getElementById('previewPremiumPrizeButton').addEventListener('click', () => {
         showScreen('premiumPreviewScreen');
         createPrizeGrid(true, true);
+        anime({
+            targets: '#prize',
+            rotateY: 360,
+            duration: 3000,
+            easing: 'spring(1, 80, 10, 0)'
+        })
     });
 
     document.getElementById('previewStandardPrizeButton').addEventListener('click', () => {
         showScreen('standardPreviewScreen');
         createPrizeGrid(false, true);
+        anime({
+            targets: '#prize',
+            rotateY: -360,
+            duration: 3000,
+            easing: 'spring(1, 80, 10, 0)'
+        })
+    });
+
+    document.getElementById('backToSelectStandardItem').addEventListener('click', () => {
+        showScreen('standardPrizeScreen');
+        createPrizeGrid(false);
+    });
+
+    document.getElementById('backToSelectPremiumItem').addEventListener('click', () => {
+        showScreen('premiumPrizeScreen');
+        createPrizeGrid(true);
     });
 
     document.querySelectorAll('.back-to-bingo-btn').forEach(button => {
@@ -450,6 +490,29 @@ document.querySelectorAll('.axe').forEach(axe => {
 });
 
 /**
+ * 景品選択確認画面表示処理
+ * @param {Object} prize - 選択された景品
+ * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
+ */
+// 景品選択確認画面表示処理
+function displayConfirmWindow(prize, isGold){
+    const confirmScreen = isGold ? 'premiumConfirmScreen' : 'standardConfirmScreen';
+    const confirmDisplay = document.getElementById(isGold ? 'premiumConfirmDisplay' : 'standardConfirmDisplay');
+    const confirmButton = document.getElementById(isGold ? 'confirmPremiumItem' : 'confirmStandardItem');
+
+    confirmDisplay.innerHTML = `
+        <img src="${prize.image}" alt="当選景品">
+        <div class="prize-info">
+            <h2>景品番号 ${prize.id}</h2>
+            <h2>${prize.name}</h2>
+        </div>
+    `;
+
+    showScreen(confirmScreen);
+    confirmButton.addEventListener('click', () => selectPrize(prize, isGold));
+}
+
+/**
  * 景品選択処理
  * @param {Object} prize - 選択された景品
  * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
@@ -471,6 +534,12 @@ function selectPrize(prize, isGold) {
 
     showScreen(winScreen);
     enhancePrizeSelection(winDisplay);
+    anime({
+        targets: winDisplay,
+        scale: [0.3, 1.5, 1.1],
+        rotateY: 360,
+        duration: 1500
+    })
 
     if (isGold) {
         checkLastOnePrize();
@@ -535,7 +604,11 @@ modalClose.addEventListener('click', () => {
     inputAnimationLength.value = animationLength;
 });
 
-// アニメーション長の入力値チェック(1000ms~10000msに強制)
+/**
+ * アニメーション長の入力値チェック
+ * @param {number} inputValue - 入力されたアニメーション長設定値
+ * @returns {number} 実設定値(範囲外の場合は1000ms~10000msに強制)
+ */
 function inputValueCheck(inputValue) {
     if(inputValue < animationLengthMin){
         inputAnimationLength.value = animationLengthMin;

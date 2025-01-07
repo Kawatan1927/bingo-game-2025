@@ -86,6 +86,15 @@
         <div id="standardPrizeGrid" class="prize-grid"></div>
     </div>
 
+    <div id="standardConfirmScreen" class="screen">
+        <h1 class="screen-title">こちらの景品でよろしいですか？</h1>
+        <div id="standardConfirmDisplay" class="win-display"></div>
+        <div  style="display: flex;">
+            <button id="confirmStandardItem" class="small-button">景品を確定する</button>
+        <button id="backToSelectStandardItem" class="small-button">選びなおす</button>
+        </div>
+    </div>
+
     <div id="standardWinScreen" class="screen">
         <h1 class="screen-title">おめでとうございます！</h1>
         <div id="silverWinDisplay" class="win-display"></div>
@@ -95,6 +104,15 @@
     <div id="premiumPrizeScreen" class="screen">
         <h1 class="screen-title">プレミアム景品を選んでください</h1>
         <div id="premiumPrizeGrid" class="prize-grid"></div>
+    </div>
+
+    <div id="premiumConfirmScreen" class="screen">
+        <h1 class="screen-title">こちらの景品でよろしいですか？</h1>
+        <div id="premiumConfirmDisplay" class="win-display"></div>
+        <div style="display: flex;">
+            <button id="confirmPremiumItem" class="small-button">景品を確定する</button>
+        <button id="backToSelectPremiumItem" class="small-button">選びなおす</button>
+        </div>
     </div>
 
     <div id="premiumWinScreen" class="screen">
@@ -128,6 +146,7 @@
     <audio id="resultSound" src="sounds/result.mp3"></audio>
     <audio id="winSound" src="sounds/win.mp3"></audio>
 
+    <script src="node_modules/animejs/lib/anime.min.js"></script>
     <script src="script.js"></script>
     <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
 </body>

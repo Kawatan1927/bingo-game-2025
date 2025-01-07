@@ -112,12 +112,12 @@ app.on('ready', function() {
   //mainWindow.webContents.openDevTools();
 
   // 設定ファイルに記載の設定をレンダラープロセスへ送信
-  setTimeout(() => {// 設定ファイルの生成との同時実行を避けるために5ms待機
+  setTimeout(() => {// 設定ファイルの生成との同時実行を避けるために100ms待機
     mainWindow.webContents.send(
       "settings",
       {animationLength: getSettingsValue('settings.animationLength')}
     );
-  }, 5);
+  }, 100);
 
   // ウィンドウが閉じられたらアプリも終了
   mainWindow.on('closed', function() {

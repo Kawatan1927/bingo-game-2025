@@ -88,10 +88,13 @@
 
     <div id="standardConfirmScreen" class="screen">
         <h1 class="screen-title">こちらの景品でよろしいですか？</h1>
-        <div id="standardConfirmDisplay" class="win-display"></div>
-        <div  style="display: flex;">
+        <div style="display: flex;">
+            <div id="standardItemImg" class="win-display"></div>
+            <div id="standardItemTxt" class="win-display"></div>
+        </div>
+        <div style="display: flex;">
             <button id="confirmStandardItem" class="small-button">景品を確定する</button>
-        <button id="backToSelectStandardItem" class="small-button">選びなおす</button>
+            <button id="backToSelectStandardItem" class="small-button">選びなおす</button>
         </div>
     </div>
 
@@ -108,10 +111,13 @@
 
     <div id="premiumConfirmScreen" class="screen">
         <h1 class="screen-title">こちらの景品でよろしいですか？</h1>
-        <div id="premiumConfirmDisplay" class="win-display"></div>
+        <div style="display: flex;">
+            <div id="premiumItemImg" class="win-display"></div>
+            <div id="premiumItemTxt" class="win-display"></div>
+        </div>
         <div style="display: flex;">
             <button id="confirmPremiumItem" class="small-button">景品を確定する</button>
-        <button id="backToSelectPremiumItem" class="small-button">選びなおす</button>
+            <button id="backToSelectPremiumItem" class="small-button">選びなおす</button>
         </div>
     </div>
 
@@ -149,5 +155,6 @@
     <script src="node_modules/animejs/lib/anime.min.js"></script>
     <script src="script.js"></script>
     <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script src="./vanilla-tilt.js"></script>
 </body>
 </html>

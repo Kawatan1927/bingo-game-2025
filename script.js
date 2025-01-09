@@ -22,40 +22,74 @@ const winSound = document.getElementById('winSound');
 // 景品データ
 const prizes = {
     gold: [
-        { id: 16, name: 'iPad', image: 'images/gold-prize-1.jpg', selected: false },
-        { id: 17, name: 'チェア', image: 'images/gold-prize-2.jpg', selected: false },
-        { id: 18, name: 'Bluetooth ヘッドホン', image: 'images/gold-prize-3.jpg', selected: false },
-        { id: 19, name: 'コーヒーメーカー', image: 'images/gold-prize-4.jpg', selected: false },
-        { id: 20, name: 'ゲーミングモニター', image: 'images/gold-prize-5.jpg', selected: false },
-        { id: 21, name: '水なし自動調理鍋', image: 'images/gold-prize-6.jpg', selected: false },
-        { id: 22, name: '除湿機', image: 'images/gold-prize-7.jpg', selected: false },
-        { id: 23, name: 'オーブンレンジ', image: 'images/gold-prize-8.jpg', selected: false },
-        { id: 24, name: 'ワイヤレスイヤホン', image: 'images/gold-prize-9.jpg', selected: false },
-        { id: 25, name: 'Dyson 掃除機', image: 'images/gold-prize-10.jpg', selected: false },
-        { id: 26, name: 'ReFaヘッドマッサージ', image: 'images/gold-prize-11.jpg', selected: false },
-        { id: 27, name: 'Wi-Fiルーター', image: 'images/gold-prize-12.jpg', selected: false },
-        { id: 28, name: 'ReFa シャワーヘッド', image: 'images/gold-prize-13.jpg', selected: false },
-        { id: 29, name: 'Nintendo Switch Lite', image: 'images/gold-prize-14.jpg', selected: false },
-        { id: 30, name: 'ドライヤー', image: 'images/gold-prize-15.jpg', selected: false },
+        { id: 16, name: 'iPad', image: 'images/gold-prize-1.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 17, name: 'チェア', image: 'images/gold-prize-2.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 18, name: 'Bluetooth ヘッドホン', image: 'images/gold-prize-3.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 19, name: 'コーヒーメーカー', image: 'images/gold-prize-4.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 20, name: 'ゲーミングモニター', image: 'images/gold-prize-5.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 21, name: '水なし自動調理鍋', image: 'images/gold-prize-6.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 22, name: '除湿機', image: 'images/gold-prize-7.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 23, name: 'オーブンレンジ', image: 'images/gold-prize-8.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 24, name: 'ワイヤレスイヤホン', image: 'images/gold-prize-9.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 25, name: 'Dyson 掃除機', image: 'images/gold-prize-10.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 26, name: 'ReFaヘッドマッサージ', image: 'images/gold-prize-11.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 27, name: 'Wi-Fiルーター', image: 'images/gold-prize-12.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 28, name: 'ReFa シャワーヘッド', image: 'images/gold-prize-13.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 29, name: 'Nintendo Switch Lite', image: 'images/gold-prize-14.jpg', selected: false, description: '何か説明が入ります。'  },
+        { id: 30, name: 'ドライヤー', image: 'images/gold-prize-15.jpg', selected: false , description: '何か説明が入ります。' },
     ],
     silver: [
-        { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false },
-        { id: 2, name: '百黙 純米大吟醸', image: 'images/silver-prize-2.jpg', selected: false },
-        { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false },
-        { id: 4, name: '魚沼産こしひかり 10kg', image: 'images/silver-prize-4.jpg', selected: false },
-        { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false },
-        { id: 6, name: '加湿器', image: 'images/silver-prize-6.jpg', selected: false },
-        { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false },
-        { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false },
-        { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false },
-        { id: 10, name: 'ザ･プレミアム･モルツ', image: 'images/silver-prize-10.jpg', selected: false },
-        { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false },
-        { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false },
-        { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false },
-        { id: 14, name: 'サウナハット', image: 'images/silver-prize-14.jpg', selected: false },
-        { id: 15, name: '缶詰おつまみ 3缶セット', image: 'images/silver-prize-15.jpg', selected: false },
+        { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 2, name: '百黙 純米大吟醸', image: 'images/silver-prize-2.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 4, name: '魚沼産こしひかり 10kg', image: 'images/silver-prize-4.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 6, name: '加湿器', image: 'images/silver-prize-6.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 10, name: 'ザ･プレミアム･モルツ', image: 'images/silver-prize-10.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 14, name: 'サウナハット', image: 'images/silver-prize-14.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 15, name: '缶詰おつまみ 3缶セット', image: 'images/silver-prize-15.jpg', selected: false , description: '何か説明が入ります。' },
     ],
 };
+
+// スタック操作関数
+function Stack() {
+	this.__a = new Array();
+}
+
+Stack.prototype.push = function(o) {
+	this.__a.push(o);
+}
+
+Stack.prototype.pop = function() {
+	if( this.__a.length > 0 ) {
+		return this.__a.pop();
+	}
+	return null;
+}
+
+Stack.prototype.size = function() {
+	return this.__a.length;
+}
+
+// 景品選択管理スタック(LIFO)
+const selectedPrizeIdStack = new Stack();
+
+// スタックに積まれている景品を獲得済みにする関数
+function updateSelectedPrizes(){
+    var selectedPremiumId = selectedPrizeIdStack.pop();
+    var selectedStandardId = selectedPrizeIdStack.pop();
+    var selectedPremiumPrize = prizes.gold.find(prize => prize.id === selectedPremiumId);
+    var selectedStandardPrize = prizes.silver.find(prize => prize.id === selectedStandardId);
+
+    selectedPremiumPrize.selected = true;
+    selectedStandardPrize.selected = true;
+}
 
 // アニメーション長設定欄
 const inputAnimationLength = document.getElementById("animationLength");
@@ -329,7 +363,8 @@ function createPrizeGrid(isGold, previewMode = false) {
     gridContainer.innerHTML = '';
     prizeList.forEach(prize => {
         const item = document.createElement('div');
-        item.setAttribute("id", "prize");
+        // const addId = prize.id % 5;
+        // item.setAttribute("id", "prize" + addId);
         item.className = `prize-item ${prize.selected ? 'selected' : ''}`;
         if (previewMode) {
             item.classList.add('preview');
@@ -353,6 +388,26 @@ function createPrizeGrid(isGold, previewMode = false) {
 
         gridContainer.appendChild(item);
     });
+    /*
+    var tl = anime.timeline({
+        easing: 'easeOutExpo',
+        duration: 1000
+      });
+      
+      tl
+      .add({
+        targets: ['#prize1', '#prize0'],
+        translateY: [100, 0],
+      }, '-=1000')
+      .add({
+        targets: ['#prize2', '#prize4'],
+        translateY: [800, 0],
+      }, '-=700')
+      .add({
+        targets: '#prize3',
+        translateY: [800, 0],
+      }, '-=500')
+      */
 }
 
 // 画面遷移ボタンのイベントリスナー設定
@@ -360,59 +415,40 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toStandardPrizeButton').addEventListener('click', () => {
         showScreen('standardPrizeScreen');
         createPrizeGrid(false);
-        anime({
-            targets: '#prize',
-            rotateY: -360,
-            duration: 3000,
-            easing: 'spring(1, 80, 10, 0)'
-        })
     });
 
     document.getElementById('toPremiumPrizeButton').addEventListener('click', () => {
         showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
-        anime({
-            targets: '#prize',
-            rotateY: 360,
-            duration: 3000,
-            easing: 'spring(1, 80, 10, 0)'
-        })
     });
 
     document.getElementById('previewPremiumPrizeButton').addEventListener('click', () => {
         showScreen('premiumPreviewScreen');
         createPrizeGrid(true, true);
-        anime({
-            targets: '#prize',
-            rotateY: 360,
-            duration: 3000,
-            easing: 'spring(1, 80, 10, 0)'
-        })
     });
 
     document.getElementById('previewStandardPrizeButton').addEventListener('click', () => {
         showScreen('standardPreviewScreen');
         createPrizeGrid(false, true);
-        anime({
-            targets: '#prize',
-            rotateY: -360,
-            duration: 3000,
-            easing: 'spring(1, 80, 10, 0)'
-        })
     });
 
     document.getElementById('backToSelectStandardItem').addEventListener('click', () => {
+        selectedPrizeIdStack.pop();
         showScreen('standardPrizeScreen');
         createPrizeGrid(false);
     });
 
     document.getElementById('backToSelectPremiumItem').addEventListener('click', () => {
+        selectedPrizeIdStack.pop();
         showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
     });
 
     document.querySelectorAll('.back-to-bingo-btn').forEach(button => {
         button.addEventListener('click', () => {
+            if(selectedPrizeIdStack.size() > 0){
+                updateSelectedPrizes();
+            }
             showScreen('bingoScreen');
         });
     });
@@ -497,19 +533,52 @@ document.querySelectorAll('.axe').forEach(axe => {
 // 景品選択確認画面表示処理
 function displayConfirmWindow(prize, isGold){
     const confirmScreen = isGold ? 'premiumConfirmScreen' : 'standardConfirmScreen';
-    const confirmDisplay = document.getElementById(isGold ? 'premiumConfirmDisplay' : 'standardConfirmDisplay');
+    const itemImg = document.getElementById(isGold ? 'premiumItemImg' : 'standardItemImg');
+    const itemTxt = document.getElementById(isGold ? 'premiumItemTxt' : 'standardItemTxt');
     const confirmButton = document.getElementById(isGold ? 'confirmPremiumItem' : 'confirmStandardItem');
 
-    confirmDisplay.innerHTML = `
+    itemImg.innerHTML = `
         <img src="${prize.image}" alt="当選景品">
+    `;
+
+    itemTxt.innerHTML = `
         <div class="prize-info">
-            <h2>景品番号 ${prize.id}</h2>
-            <h2>${prize.name}</h2>
+            <h4 id="line1">景品番号 ${prize.id}</h4>
+            <h4 id="line2">${prize.name}</h4>
+            <h6 id="line3">${prize.description}</h6>
         </div>
     `;
 
     showScreen(confirmScreen);
     confirmButton.addEventListener('click', () => selectPrize(prize, isGold));
+    selectedPrizeIdStack.push(prize.id);
+
+    anime({
+        targets: itemImg,
+        scale: [0.5, 1],
+        duration: 3500
+    });
+
+    var tl = anime.timeline({
+        easing: 'easeOutExpo',
+        duration: 1000
+      });
+      
+      tl
+      .add({
+        targets: '#line1',
+        translateX: [-1700, -20],
+      })
+      .add({
+        targets: '#line2',
+        translateX: [-1700, -20],
+      }, '-=500')
+      .add({
+        targets: '#line3',
+        translateX: [-1700, -20],
+      }, '-=500')
+
+      
 }
 
 /**
@@ -518,28 +587,46 @@ function displayConfirmWindow(prize, isGold){
  * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
  */
 function selectPrize(prize, isGold) {
-    prize.selected = true;
     winSound.play();
 
     const winScreen = isGold ? 'premiumWinScreen' : 'standardWinScreen';
     const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
+    var displayNum = ('00' + prize.id ).slice( -2 );
 
     winDisplay.innerHTML = `
-        <img src="${prize.image}" alt="当選景品">
-        <div class="prize-info">
-            <h2>景品番号 ${prize.id}</h2>
-            <h2>${prize.name}</h2>
+        <div id="${prize.id}" class="card">
+            <div class="content">
+                <h3 style="font-family: cursive;">CONGRATULATIONS!</h3>
+                <h2>${displayNum}</h2>
+                <br>
+                <p>
+                    <img src="${prize.image}" alt="当選景品">
+                </p>
+                <h3>${prize.name}</h3>
+            </div>
         </div>
     `;
 
+    VanillaTilt.init(document.getElementById(prize.id), {
+        max: 25,
+        speed: 400,
+        glare: true,
+    });
+
     showScreen(winScreen);
     enhancePrizeSelection(winDisplay);
+    
     anime({
         targets: winDisplay,
-        scale: [0.3, 1.5, 1.1],
+        translateY: [-500, 0],
         rotateY: 360,
-        duration: 1500
-    })
+        duration: 5000,
+        complete: function(anime){ //callback関数
+            anime.set(winDisplay, {
+                rotateY: 0
+            });
+        }
+    });
 
     if (isGold) {
         checkLastOnePrize();
@@ -548,7 +635,7 @@ function selectPrize(prize, isGold) {
 
 // ラストワン賞画面処理
 function checkLastOnePrize() {
-    const allSelected = prizes.gold.every(prize => prize.selected) && prizes.silver.every(prize => prize.selected);
+    const allSelected = (prizes.gold.filter(prize => prize.selected === false).length == 1) && (prizes.silver.filter(prize => prize.selected === false).length == 1);
     const toLastOnePrizeButton = document.getElementById('toLastOnePrizeButton');
     const backToBingoButton = document.getElementById('backToBingoFromGoldWin');
     

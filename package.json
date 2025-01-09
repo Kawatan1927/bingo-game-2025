@@ -25,7 +25,8 @@
       "package.json",
       "preload.js",
       "script.js",
-      "styles.css"
+      "styles.css",
+      "vanilla-tilt.js"
     ],
     "win": {
       "icon": "assets/win/bingo.ico",

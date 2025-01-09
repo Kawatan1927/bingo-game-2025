@@ -40,7 +40,7 @@ const prizes = {
     ],
     silver: [
         { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false },
-        { id: 2, name: '百黙 純米大吟醸', image: 'images/silver-prize-2.jpg', selected: false },
+        { id: 2, name: '日本酒 一升瓶', image: 'images/silver-prize-2.jpg', selected: false },
         { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false },
         { id: 4, name: '魚沼産こしひかり 10kg', image: 'images/silver-prize-4.jpg', selected: false },
         { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false },
@@ -48,7 +48,7 @@ const prizes = {
         { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false },
         { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false },
         { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false },
-        { id: 10, name: 'ザ･プレミアム･モルツ', image: 'images/silver-prize-10.jpg', selected: false },
+        { id: 10, name: 'ビールギフト', image: 'images/silver-prize-10.jpg', selected: false },
         { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false },
         { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false },
         { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false },

@@ -113,7 +113,7 @@ app.on('ready', function() {
   mainWindow.loadURL('file://' + __dirname + '/bingo.html');
 
   // デベロッパーツールの表示(必要だったらコメントアウトを外してください)
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // 設定ファイルに記載の設定をレンダラープロセスへ送信
   setTimeout(() => {// 設定ファイルの生成との同時実行を避けるために5ms待機

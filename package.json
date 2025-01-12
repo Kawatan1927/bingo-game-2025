@@ -19,6 +19,8 @@
     "files": [
       "assets",
       "images",
+      "sounds",
+      "audio.js",
       "bingo.html",
       "main.js",
       "package-lock.json",

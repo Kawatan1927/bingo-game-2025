@@ -177,7 +177,7 @@ document.getElementById('drawButton').addEventListener('click', () => {
         button.style.opacity = '0.5';
     });
 
-    drawSound.play();
+    playDrawSound(animationLength / 1000);
 
     let number = bingoNumbers[drawingCount];
     drawingCount++;
@@ -234,18 +234,80 @@ function updateHistory() {
 
 // 斧選択画面への移動
 document.getElementById('toAxeButton').addEventListener('click', () => {
+    playDecisionSound();
+    playDisplayAxeSound();
     showScreen('axeSelectionScreen');
     anime({
         targets: '#axeSelectionScreen',
-        scale: [0.3, 1],
-        duration: 1500
+        scale: [0, 1],
+        duration: 1200,
+        easing: 'cubicBezier(1, 1.49, 1, 1.16)'
     })
 });
 
 // 結果発表ボタンクリックで結果表示
 document.getElementById('axeResultButton').addEventListener('click', () => {
     if (currentScreen === 'axeSelectionScreen') {
-        showAxeResult();
+        const text = 'ARE YOU READY?';
+        const msg = document.getElementById('pre-result-message');
+
+        msg.innerHTML = ``;
+        
+        playResultButtonSound();
+        showScreen('preResultScreen');
+        anime({
+            targets: '#preResultScreen',
+            opacity: [0, 1],
+            duration: 7000,
+		    fill: 'forwards'
+        })
+
+        setTimeout(() => {
+            for(i = 0; i < text.length; i++){
+                if(text[i] == ' '){
+                    msg.innerHTML += `<span><pre> </pre></span>`
+                }else{
+                    msg.innerHTML += `<span>${text[i]}</span>`
+                }
+            }
+
+            playDisplayMessageSound(1.6);
+
+            anime({
+                targets: '.pre-result-message > span',
+                scale: [0, 1],
+                duration: 200,
+                easing: 'easeInElastic(10,1)',
+                delay: anime.stagger(100)
+            }); 
+        }, 5000);
+
+        setTimeout(() => {
+            playDisplayMessageSound(1.6);
+
+            anime({
+                targets: '.pre-result-message > span',
+                scale: [1, 0],
+                duration: 200,
+                easing: 'easeInElastic(10,1)',
+                delay: anime.stagger(100)
+            }); 
+        }, 12000);
+
+        setTimeout(() => {
+            playResultSound(5);
+        }, 15000);
+
+        setTimeout(() => {
+            
+            showAxeResult();
+
+            anime({
+                targets: '#resultScreen',
+                scale: [0, 1],
+                duration: 1200,
+            })
+        }, 20000);   
     }
 })
 
@@ -332,14 +394,14 @@ const silverImg = document.getElementById('silverImg');
     if(resultFlag > 0.5){
         goldImg.setAttribute('class', 'dark');
         silverImg.setAttribute('class', 'brite');
-        setTimeout(starShoot(silverSettings), 0);
+        setTimeout(starShoot(silverSettings), 120);
         setTimeout(starShoot(silverSettings), 200);
         setTimeout(starShoot(silverSettings), 400);
         setTimeout(starShoot(silverSettings), 600);
     }else{
         goldImg.setAttribute('class', 'brite');
         silverImg.setAttribute('class', 'dark');
-        setTimeout(starShoot(goldSettings), 0);
+        setTimeout(starShoot(goldSettings), 120);
         setTimeout(starShoot(goldSettings), 200);
         setTimeout(starShoot(goldSettings), 400);
         setTimeout(starShoot(goldSettings), 600);
@@ -413,32 +475,38 @@ function createPrizeGrid(isGold, previewMode = false) {
 // 画面遷移ボタンのイベントリスナー設定
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toStandardPrizeButton').addEventListener('click', () => {
+        playTransitionSound();
         showScreen('standardPrizeScreen');
         createPrizeGrid(false);
     });
 
     document.getElementById('toPremiumPrizeButton').addEventListener('click', () => {
+        playTransitionSound();
         showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
     });
 
     document.getElementById('previewPremiumPrizeButton').addEventListener('click', () => {
+        playTransitionSound();
         showScreen('premiumPreviewScreen');
         createPrizeGrid(true, true);
     });
 
     document.getElementById('previewStandardPrizeButton').addEventListener('click', () => {
+        playTransitionSound();
         showScreen('standardPreviewScreen');
         createPrizeGrid(false, true);
     });
 
     document.getElementById('backToSelectStandardItem').addEventListener('click', () => {
+        playCancelSound();
         selectedPrizeIdStack.pop();
         showScreen('standardPrizeScreen');
         createPrizeGrid(false);
     });
 
     document.getElementById('backToSelectPremiumItem').addEventListener('click', () => {
+        playCancelSound();
         selectedPrizeIdStack.pop();
         showScreen('premiumPrizeScreen');
         createPrizeGrid(true);
@@ -449,6 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(selectedPrizeIdStack.size() > 0){
                 updateSelectedPrizes();
             }
+            playCancelSound();
             showScreen('bingoScreen');
         });
     });
@@ -537,6 +606,9 @@ function displayConfirmWindow(prize, isGold){
     const itemTxt = document.getElementById(isGold ? 'premiumItemTxt' : 'standardItemTxt');
     const confirmButton = document.getElementById(isGold ? 'confirmPremiumItem' : 'confirmStandardItem');
 
+    playTransitionSound();
+    playDisplayPrizeSound();
+
     itemImg.innerHTML = `
         <img src="${prize.image}" alt="当選景品">
     `;
@@ -587,7 +659,8 @@ function displayConfirmWindow(prize, isGold){
  * @param {boolean} isGold - 金の斧の場合はtrue、銀の斧の場合はfalse
  */
 function selectPrize(prize, isGold) {
-    winSound.play();
+    playDecisionSound();
+    playGetPrizeSound();
 
     const winScreen = isGold ? 'premiumWinScreen' : 'standardWinScreen';
     const winDisplay = document.getElementById(isGold ? 'goldWinDisplay' : 'silverWinDisplay');
@@ -675,11 +748,13 @@ const modalClose = document.querySelector('.js-close-button');
 
 // 設定ボタン押下時イベント
 modalButton.addEventListener('click', () => {
+    playSettingsMenuOpenSound();
     modal.classList.add('is-open');
 });
 
 // 設定完了ボタン押下時イベント
 modalComplete.addEventListener('click', () => {
+    playSettingsCompleteSound();
     modal.classList.remove('is-open');
     animationLength = inputValueCheck(inputAnimationLength.value);
     window.api.send("update_animation_length", animationLength);
@@ -687,6 +762,7 @@ modalComplete.addEventListener('click', () => {
 
 // キャンセルボタン押下時イベント
 modalClose.addEventListener('click', () => {
+    playSettingsCancelSound();
     modal.classList.remove('is-open');
     inputAnimationLength.value = animationLength;
 });

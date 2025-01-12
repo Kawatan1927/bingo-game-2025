@@ -67,6 +67,12 @@
         <button class="back-to-bingo-btn small-button">ビンゴに戻る</button>
     </div>
 
+    <div id="preResultScreen" class="screen pre-result">
+        <div class="wrap">
+            <div id="pre-result-message" class="pre-result-message"></div>
+        </div>
+    </div>
+
     <div id="resultScreen" class="screen">
         <h1 class="screen-title">結果発表</h1>
         <div id="resultMessage" class="result-text"></div>
@@ -148,10 +154,7 @@
         <h1>JTBプレミアムギフトカタログ</h1>
     </div>
 
-    <audio id="drawSound" src="sounds/draw.mp3"></audio>
-    <audio id="resultSound" src="sounds/result.mp3"></audio>
-    <audio id="winSound" src="sounds/win.mp3"></audio>
-
+    <script src="audio.js"></script>
     <script src="node_modules/animejs/lib/anime.min.js"></script>
     <script src="script.js"></script>
     <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>

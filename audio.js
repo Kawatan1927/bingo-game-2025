@@ -251,5 +251,5 @@ window.addEventListener("load", async ()=>{
  
     // 音声ソースを読み込んで音声バッファに格納する
     audioBuffers = await getAudioBuffer(entries);
-    alert("音声ソース読み込み完了！");
+    // alert("音声ソース読み込み完了！");
 });

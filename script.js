@@ -5,12 +5,16 @@ let drawingCount = 0;
 let currentScreen = 'bingoScreen';
 let isFullscreen = false;
 let animationLength;
+let individualFirstAnimationSetting;
+let firstAnimationLength;
 let animationLengthMin = 1000; // アニメーション長最小値
 let animationLengthMax = 10000; // アニメーション長最大値
 
 // メインプロセスから設定ファイルの値を受信およびキャスト
 window.api.on("settings", (arg) => {
     animationLength = parseInt(arg.animationLength);
+    individualFirstAnimationSetting = Boolean(arg.individualFirstAnimationSetting);
+    firstAnimationLength = parseInt(arg.firstAnimationLength);
 });
 
 // 音声エフェクト
@@ -93,6 +97,8 @@ function updateSelectedPrizes(){
 
 // アニメーション長設定欄
 const inputAnimationLength = document.getElementById("animationLength");
+const animationToggle = document.getElementById('animationToggle');
+const inputFirstAnimation = document.getElementById('firstAnimationLength');
 
 // 全画面表示の管理
 document.getElementById('fullscreenBtn').addEventListener('click', () => {
@@ -119,6 +125,8 @@ window.onload = function () {
     console.log(bingoNumbers);
 
     inputAnimationLength.value = animationLength;
+    animationToggle.checked = individualFirstAnimationSetting;
+    inputFirstAnimation.value = firstAnimationLength;
 };
 
 /**
@@ -180,10 +188,11 @@ document.getElementById('drawButton').addEventListener('click', () => {
     playDrawSound(animationLength / 1000);
 
     let number = bingoNumbers[drawingCount];
-    drawingCount++;
-
     animateNumber(number);
 
+    const time = (drawingCount == 0) && animationToggle.checked ? firstAnimationLength : animationLength;
+    drawingCount++;
+    
     // アニメーション完了後にボタンを再度有効化
     setTimeout(() => {
         gameControlButtons.forEach(button => {
@@ -191,7 +200,7 @@ document.getElementById('drawButton').addEventListener('click', () => {
             button.style.opacity = '1';
         });
         enhanceDrawAnimation(number);
-    }, animationLength);
+    }, time);
 });
 
 /**
@@ -201,7 +210,7 @@ document.getElementById('drawButton').addEventListener('click', () => {
 function animateNumber(targetNumber) {
     const currentNumber = document.getElementById('currentNumber');
     let count = 0;
-    const duration = animationLength; // 5秒間
+    const duration = (drawingCount == 0) && animationToggle.checked ? firstAnimationLength : animationLength;
     const interval = 50; // 50ミリ秒ごとに更新
     const steps = duration / interval;
 
@@ -756,8 +765,16 @@ modalButton.addEventListener('click', () => {
 modalComplete.addEventListener('click', () => {
     playSettingsCompleteSound();
     modal.classList.remove('is-open');
-    animationLength = inputValueCheck(inputAnimationLength.value);
-    window.api.send("update_animation_length", animationLength);
+    animationLength = inputValueCheck(inputAnimationLength);
+    individualFirstAnimationSetting = animationToggle.checked;
+    firstAnimationLength = inputValueCheck(inputFirstAnimation);
+    window.api.send(
+        "update_animation_length", 
+        { 
+            animationLength,
+            individualFirstAnimationSetting,
+            firstAnimationLength
+        });
 });
 
 // キャンセルボタン押下時イベント
@@ -767,19 +784,24 @@ modalClose.addEventListener('click', () => {
     inputAnimationLength.value = animationLength;
 });
 
-/**
- * アニメーション長の入力値チェック
- * @param {number} inputValue - 入力されたアニメーション長設定値
- * @returns {number} 実設定値(範囲外の場合は1000ms~10000msに強制)
- */
-function inputValueCheck(inputValue) {
-    if(inputValue < animationLengthMin){
-        inputAnimationLength.value = animationLengthMin;
+// 初回アニメーション長設定トグル押下時イベント
+animationToggle.addEventListener('change', () => {
+    if(animationToggle.checked){
+        inputFirstAnimation.disabled = false;
+    }else{
+        inputFirstAnimation.disabled = true;
+    }
+})
+
+// アニメーション長の入力値チェック(1000ms~10000msに強制)
+function inputValueCheck(inputValueElem) {
+    if(inputValueElem.value < animationLengthMin){
+        inputValueElem.value = animationLengthMin;
         return animationLengthMin;
-    }else if(inputValue > animationLengthMax){
-        inputAnimationLength.value = animationLengthMax;
+    }else if(inputValueElem.value > animationLengthMax){
+        inputValueElem.value = animationLengthMax;
         return animationLengthMax;
     }else{
-        return inputValue;
+        return inputValueElem.value;
     };
 }

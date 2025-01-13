@@ -7,6 +7,7 @@ const audioFiles = {
     cancelButton: "sounds/Button_SE7.mp3",
     transitionButton: "sounds/Button_SE9.mp3",
     resultButton: "sounds/Button_SE_10.mp3",
+    lastOneButton: "sounds/Button_SE_11.mp3",
     drawButton: "sounds/Button_SE4.mp3",
     drawStart: "sounds/Digital_Count_SE1.mp3",
     drawStop: "sounds/Digital_Count_Stop_SE1.mp3",
@@ -142,6 +143,13 @@ function playSettingsCompleteSound() {
  */
 function playSettingsCancelSound() {
     playSound("settingsCancel");
+}
+
+/**
+ * ラストワン賞ボタン押下時音声再生関数
+ */
+function playLastOneButtonSound() {
+    playSound("lastOneButton");
 }
  
 /**

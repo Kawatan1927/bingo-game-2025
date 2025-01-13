@@ -103,7 +103,7 @@ createSettingsIni(settingsIni);
 // Electronの初期化完了後に実行
 app.on('ready', function() {
   // メイン画面の表示。ウィンドウの幅、高さを指定できる
-  mainWindow = new BrowserWindow({width: 1920, height: 1080, center: true, resizable: false, frame: true, fullscreen: false,
+  mainWindow = new BrowserWindow({width: 1920, height: 1080, center: true, resizable: false, frame: true, fullscreen: false, autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -125,7 +125,7 @@ app.on('ready', function() {
         firstAnimationLength: getSettingsValue('settings.firstAnimationLength')
       }
     );
-  }, 100);
+  }, 300);
 
   // ウィンドウが閉じられたらアプリも終了
   mainWindow.on('closed', function() {

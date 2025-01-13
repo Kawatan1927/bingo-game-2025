@@ -39,7 +39,7 @@ const prizes = {
         { id: 26, name: 'ReFaヘッドマッサージ', image: 'images/gold-prize-11.jpg', selected: false , description: '何か説明が入ります。' },
         { id: 27, name: 'Wi-Fiルーター', image: 'images/gold-prize-12.jpg', selected: false , description: '何か説明が入ります。' },
         { id: 28, name: 'ReFa シャワーヘッド', image: 'images/gold-prize-13.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 29, name: 'Nintendo Switch Lite', image: 'images/gold-prize-14.jpg', selected: false, description: '何か説明が入ります。'  },
+        { id: 29, name: 'Nintendo Switch Lite', image: 'images/gold-prize-14.jpg', selected: false , description: '何か説明が入ります。'  },
         { id: 30, name: 'ドライヤー', image: 'images/gold-prize-15.jpg', selected: false , description: '何か説明が入ります。' },
     ],
     silver: [
@@ -121,12 +121,17 @@ document.addEventListener('keydown', (e) => {
 
 // 起動時処理(ビンゴ番号配列の生成、設定ファイルの値を設定欄に表示)
 window.onload = function () {
+    setTimeout(() => {
     bingoNumbers = fisherYateShuffle(forRange(1, 75));
     console.log(bingoNumbers);
 
     inputAnimationLength.value = animationLength;
     animationToggle.checked = individualFirstAnimationSetting;
     inputFirstAnimation.value = firstAnimationLength;
+    if(animationToggle.checked != true){
+        inputFirstAnimation.disabled = true;
+    }
+    }, 1500);
 };
 
 /**
@@ -185,13 +190,13 @@ document.getElementById('drawButton').addEventListener('click', () => {
         button.style.opacity = '0.5';
     });
 
-    playDrawSound(animationLength / 1000);
-
     let number = bingoNumbers[drawingCount];
     animateNumber(number);
 
     const time = (drawingCount == 0) && animationToggle.checked ? firstAnimationLength : animationLength;
     drawingCount++;
+
+    playDrawSound(time / 1000);
     
     // アニメーション完了後にボタンを再度有効化
     setTimeout(() => {
@@ -434,8 +439,6 @@ function createPrizeGrid(isGold, previewMode = false) {
     gridContainer.innerHTML = '';
     prizeList.forEach(prize => {
         const item = document.createElement('div');
-        // const addId = prize.id % 5;
-        // item.setAttribute("id", "prize" + addId);
         item.className = `prize-item ${prize.selected ? 'selected' : ''}`;
         if (previewMode) {
             item.classList.add('preview');
@@ -459,26 +462,6 @@ function createPrizeGrid(isGold, previewMode = false) {
 
         gridContainer.appendChild(item);
     });
-    /*
-    var tl = anime.timeline({
-        easing: 'easeOutExpo',
-        duration: 1000
-      });
-      
-      tl
-      .add({
-        targets: ['#prize1', '#prize0'],
-        translateY: [100, 0],
-      }, '-=1000')
-      .add({
-        targets: ['#prize2', '#prize4'],
-        translateY: [800, 0],
-      }, '-=700')
-      .add({
-        targets: '#prize3',
-        translateY: [800, 0],
-      }, '-=500')
-      */
 }
 
 // 画面遷移ボタンのイベントリスナー設定
@@ -731,9 +714,120 @@ function checkLastOnePrize() {
 }
 
 document.getElementById('toLastOnePrizeButton').addEventListener('click', () => {
-    showScreen('lastOnePrizeScreen');
-    createFireworks();
+    playLastOneButtonSound();
+    showScreen('preLastOneScreen');
+    anime({
+        targets: '#preLastOneScreen',
+        opacity: [0, 1],
+        duration: 7000,
+	    fill: 'forwards'
+    })
+
+    lastOneAnimetion(
+        'Thank you for waiting and participating in the new year party 2025.',
+        'pre-last-one-message1',
+        '.pre-last-one-message1 > span',
+        3000
+    );
+
+    lastOneAnimetion(
+        'This is LAST (31st) BINGO!!',
+        'pre-last-one-message2',
+        '.pre-last-one-message2 > span',
+        3500
+    );
+
+    lastOneAnimetion(
+        'So, I would lile to present LAST ONE PRIZE!!',
+        'pre-last-one-message3',
+        '.pre-last-one-message3 > span',
+        4000
+    );
+
+    lastOneAnimetion(
+        '                                                        ',
+        'pre-last-one-message4',
+        '.pre-last-one-message4 > span',
+        8500
+    );
+
+    lastOneAnimetion(
+        'Now Loading..........',
+        'pre-last-one-message5',
+        '.pre-last-one-message5 > span',
+        9500
+    );
+
+    lastOneAnimetion(
+        '[Prize Name]: ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮  All loaded.',
+        'pre-last-one-message6',
+        '.pre-last-one-message6 > span',
+        12000
+    );
+
+    lastOneAnimetion(
+        '[Prize Image]: ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮  All loaded.',
+        'pre-last-one-message7',
+        '.pre-last-one-message7 > span',
+        12500
+    );
+
+    lastOneAnimetion(
+        '[Prize Size]: ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮  All loaded.',
+        'pre-last-one-message8',
+        '.pre-last-one-message8 > span',
+        13000
+    );
+
+    lastOneAnimetion(
+        '[Prize Mfr.]: ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮  All loaded.',
+        'pre-last-one-message9',
+        '.pre-last-one-message9 > span',
+        13500
+    );
+
+    lastOneAnimetion(
+        '                                                               ',
+        'pre-last-one-message10',
+        '.pre-last-one-message10 > span',
+        14000
+    );
+
+    lastOneAnimetion(
+        'Loading Completed!!!',
+        'pre-last-one-message11',
+        '.pre-last-one-message11 > span',
+        19500
+    );
+
+    setTimeout(() => {
+        showScreen('lastOnePrizeScreen');
+        createFireworks();
+    }, 23500);
 });
+
+// ラストワン賞アニメーション用関数
+function lastOneAnimetion(text, elemId, target, timeout) {
+    const msg = document.getElementById(elemId);
+
+    setTimeout(() => {
+        for(i = 0; i < text.length; i++){
+            if(text[i] == ' '){
+                msg.innerHTML += `<span><pre> </pre></span>`
+            }else{
+                msg.innerHTML += `<span>${text[i]}</span>`
+            }
+        }
+
+        anime({
+            targets: target,
+            scale: [0, 1],
+            duration: 80,
+            easing: 'easeInElastic(10,1)',
+            delay: anime.stagger(100)
+        }); 
+    }, timeout);
+}
 
 //花火演出
 function createFireworks() {

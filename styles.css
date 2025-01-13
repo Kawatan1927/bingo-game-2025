@@ -364,6 +364,70 @@ label.toggle:has(input[type="checkbox"]){
     transform: scale(0);
 }
 
+/* ラストワン賞アニメーションエリア */
+.pre-last-one {
+    background-color: black;
+    color: #13c716;
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.pre-last-one-message1 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message2 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message3 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message4 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message5 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message6 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message7 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message8 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message9 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message10 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
+.pre-last-one-message11 > span {
+    display: inline-block;
+    transform: scale(0);
+}
+
 /* 結果発表エリア */
 .result-container {
     align-items: center;

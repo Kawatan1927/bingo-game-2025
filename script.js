@@ -713,6 +713,7 @@ function checkLastOnePrize() {
     }
 }
 
+// ラストワン賞アニメーション
 document.getElementById('toLastOnePrizeButton').addEventListener('click', () => {
     playLastOneButtonSound();
     showScreen('preLastOneScreen');
@@ -806,7 +807,13 @@ document.getElementById('toLastOnePrizeButton').addEventListener('click', () => 
     }, 23500);
 });
 
-// ラストワン賞アニメーション用関数
+/**
+ * ラストワン賞アニメーション用関数
+ * @param {String} text - 表示テキスト
+ * @param {String} elemId - 表示位置の要素のID
+ * @param {String} target - アニメーションターゲットID/クラス
+ * @param {number} timeout - アニメーション開始時間(ミリ秒)
+ */
 function lastOneAnimetion(text, elemId, target, timeout) {
     const msg = document.getElementById(elemId);
 

@@ -17,9 +17,6 @@ const audioFiles = {
     getPrize: "sounds/Get_Prize_SE.mp3",
     axeMove: "sounds/Axe_Move_SE.mp3",
     axeStop: "sounds/Axe_Move_Stop_SE.mp3",
-    settingsOpen: "sounds/Settings_Open_SE.mp3",
-    settingsComplete: "sounds/Settings_Complete_SE.mp3",
-    settingsCancel: "sounds/Settings_Cancel_SE.mp3",
     displayPrize: "sounds/Display_Prize_SE.mp3",
     displayMessage: "sounds/Display_Message_SE.mp3"
 };
@@ -122,27 +119,6 @@ function playTransitionSound() {
  */
 function playCancelSound() {
     playSound("cancelButton");
-}
-
-/**
- * 設定ボタン押下時音声再生関数
- */
-function playSettingsMenuOpenSound() {
-    playSound("settingsOpen");
-}
-
-/**
- * 設定完了ボタン押下時音声再生関数
- */
-function playSettingsCompleteSound() {
-    playSound("settingsComplete");
-}
-
-/**
- * 設定キャンセルボタン押下時音声再生関数
- */
-function playSettingsCancelSound() {
-    playSound("settingsCancel");
 }
 
 /**

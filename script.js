@@ -285,32 +285,32 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
                 }
             }
 
-            playDisplayMessageSound(1.6);
+            playDisplayMessageSound(1.4);
 
             anime({
                 targets: '.pre-result-message > span',
                 scale: [0, 1],
-                duration: 200,
+                duration: 150,
                 easing: 'easeInElastic(10,1)',
                 delay: anime.stagger(100)
             }); 
-        }, 5000);
+        }, 1500);
 
         setTimeout(() => {
-            playDisplayMessageSound(1.6);
+            playDisplayMessageSound(1.4);
 
             anime({
                 targets: '.pre-result-message > span',
                 scale: [1, 0],
-                duration: 200,
+                duration: 150,
                 easing: 'easeInElastic(10,1)',
                 delay: anime.stagger(100)
             }); 
-        }, 12000);
+        }, 3500);
 
         setTimeout(() => {
-            playResultSound(5);
-        }, 15000);
+            playResultSound(2.8);
+        }, 5000);
 
         setTimeout(() => {
             
@@ -321,7 +321,7 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
                 scale: [0, 1],
                 duration: 1200,
             })
-        }, 20000);   
+        }, 7800);   
     }
 })
 
@@ -684,7 +684,7 @@ function selectPrize(prize, isGold) {
     anime({
         targets: winDisplay,
         translateY: [-500, 0],
-        rotateY: 360,
+        rotateY: [180, 360],
         duration: 5000,
         complete: function(anime){ //callback関数
             anime.set(winDisplay, {
@@ -858,13 +858,13 @@ const modalClose = document.querySelector('.js-close-button');
 
 // 設定ボタン押下時イベント
 modalButton.addEventListener('click', () => {
-    playSettingsMenuOpenSound();
+    playTransitionSound();
     modal.classList.add('is-open');
 });
 
 // 設定完了ボタン押下時イベント
 modalComplete.addEventListener('click', () => {
-    playSettingsCompleteSound();
+    playDecisionSound();
     modal.classList.remove('is-open');
     animationLength = inputValueCheck(inputAnimationLength);
     individualFirstAnimationSetting = animationToggle.checked;
@@ -880,7 +880,7 @@ modalComplete.addEventListener('click', () => {
 
 // キャンセルボタン押下時イベント
 modalClose.addEventListener('click', () => {
-    playSettingsCancelSound();
+    playCancelSound();
     modal.classList.remove('is-open');
     inputAnimationLength.value = animationLength;
 });

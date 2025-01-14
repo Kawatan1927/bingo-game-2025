@@ -850,6 +850,32 @@ function createFireworks() {
     }
 }
 
+// デバッグ用チェックボックスの要素を取得
+const debugPrizeSelect = document.getElementById('debugPrizeSelect');
+
+// デバッグ用の景品選択処理
+function debugSelectPrizes() {
+    if (debugPrizeSelect.checked) {
+        // 金の景品を14個選択済みに
+        for (let i = 0; i < prizes.gold.length - 1; i++) {
+            prizes.gold[i].selected = true;
+        }
+
+        // 銀の景品を14個選択済みに
+        for (let i = 0; i < prizes.silver.length - 1; i++) {
+            prizes.silver[i].selected = true;
+        }
+    } else {
+        // すべての景品の選択状態をリセット
+        prizes.gold.forEach(prize => prize.selected = false);
+        prizes.silver.forEach(prize => prize.selected = false);
+    }
+
+    // 景品グリッドを再描画
+    createPrizeGrid(true);
+    createPrizeGrid(false);
+}
+
 // 設定値入力欄制御用変数
 const modal = document.querySelector('.js-modal');
 const modalButton = document.querySelector('.js-modal-button');
@@ -869,6 +895,7 @@ modalComplete.addEventListener('click', () => {
     animationLength = inputValueCheck(inputAnimationLength);
     individualFirstAnimationSetting = animationToggle.checked;
     firstAnimationLength = inputValueCheck(inputFirstAnimation);
+    debugSelectPrizes();
     window.api.send(
         "update_animation_length",
         {
@@ -883,6 +910,7 @@ modalClose.addEventListener('click', () => {
     playSettingsCancelSound();
     modal.classList.remove('is-open');
     inputAnimationLength.value = animationLength;
+    debugPrizeSelect.checked = false;
 });
 
 // 初回アニメーション長設定トグル押下時イベント

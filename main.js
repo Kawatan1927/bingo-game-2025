@@ -45,13 +45,17 @@ function createSettingsIni(filePath){
 function setDefaultValue(filePath){
   const properties = propertiesReader(filePath);
   properties.set('settings.animationLength', '2500');
+  properties.set('settings.individualFirstAnimationSetting', 'true');
+  properties.set('settings.firstAnimationLength', '5000');
   properties.save(filePath);
 }
 
 // 設定ファイルの値を更新
 function updateValue(filePath, newValue){
   const properties = propertiesReader(filePath);
-  properties.set('settings.animationLength', newValue);
+  properties.set('settings.animationLength', newValue.animationLength);
+  properties.set('settings.individualFirstAnimationSetting', newValue.individualFirstAnimationSetting);
+  properties.set('settings.firstAnimationLength', newValue.firstAnimationLength);
   properties.save(filePath);
 }
 
@@ -99,7 +103,7 @@ createSettingsIni(settingsIni);
 // Electronの初期化完了後に実行
 app.on('ready', function() {
   // メイン画面の表示。ウィンドウの幅、高さを指定できる
-  mainWindow = new BrowserWindow({width: 1920, height: 1080, center: true, resizable: false, frame: true, fullscreen: false,
+  mainWindow = new BrowserWindow({width: 1920, height: 1080, center: true, resizable: false, frame: true, fullscreen: false, autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -112,12 +116,16 @@ app.on('ready', function() {
   //mainWindow.webContents.openDevTools();
 
   // 設定ファイルに記載の設定をレンダラープロセスへ送信
-  setTimeout(() => {// 設定ファイルの生成との同時実行を避けるために5ms待機
+  setTimeout(() => {// 設定ファイルの生成との同時実行を避けるために100ms待機
     mainWindow.webContents.send(
       "settings",
-      {animationLength: getSettingsValue('settings.animationLength')}
+      {
+        animationLength: getSettingsValue('settings.animationLength'),
+        individualFirstAnimationSetting: getSettingsValue('settings.individualFirstAnimationSetting'),
+        firstAnimationLength: getSettingsValue('settings.firstAnimationLength')
+      }
     );
-  }, 5);
+  }, 300);
 
   // ウィンドウが閉じられたらアプリも終了
   mainWindow.on('closed', function() {

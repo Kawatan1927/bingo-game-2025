@@ -44,7 +44,7 @@ const prizes = {
     ],
     silver: [
         { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false },
-        { id: 2, name: '日本酒 一升瓶', image: 'images/silver-prize-2.jpg', selected: false },
+        { id: 2, name: '日本酒', image: 'images/silver-prize-2.jpg', selected: false },
         { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false },
         { id: 4, name: 'あきたこまち 10kg', image: 'images/silver-prize-4.jpg', selected: false },
         { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false },

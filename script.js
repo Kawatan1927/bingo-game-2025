@@ -43,21 +43,21 @@ const prizes = {
         { id: 30, name: 'ドライヤー', image: 'images/gold-prize-15.jpg', selected: false , description: '何か説明が入ります。' },
     ],
     silver: [
-        { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 2, name: '百黙 純米大吟醸', image: 'images/silver-prize-2.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 4, name: '魚沼産こしひかり 10kg', image: 'images/silver-prize-4.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 6, name: '加湿器', image: 'images/silver-prize-6.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 10, name: 'ザ･プレミアム･モルツ', image: 'images/silver-prize-10.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 14, name: 'サウナハット', image: 'images/silver-prize-14.jpg', selected: false , description: '何か説明が入ります。' },
-        { id: 15, name: '缶詰おつまみ 3缶セット', image: 'images/silver-prize-15.jpg', selected: false , description: '何か説明が入ります。' },
+        { id: 1, name: 'ヒツジのいらない枕', image: 'images/silver-prize-1.jpg', selected: false },
+        { id: 2, name: '日本酒', image: 'images/silver-prize-2.jpg', selected: false },
+        { id: 3, name: '布団乾燥機', image: 'images/silver-prize-3.jpg', selected: false },
+        { id: 4, name: 'あきたこまち 10kg', image: 'images/silver-prize-4.jpg', selected: false },
+        { id: 5, name: 'ホットカーペット', image: 'images/silver-prize-5.jpg', selected: false },
+        { id: 6, name: '加湿器', image: 'images/silver-prize-6.jpg', selected: false },
+        { id: 7, name: '電動歯ブラシ', image: 'images/silver-prize-7.jpg', selected: false },
+        { id: 8, name: 'ゴルフボール 1ダース', image: 'images/silver-prize-8.jpg', selected: false },
+        { id: 9, name: 'プラレール レールキット', image: 'images/silver-prize-9.jpg', selected: false },
+        { id: 10, name: 'ビールギフト', image: 'images/silver-prize-10.jpg', selected: false },
+        { id: 11, name: 'ドンジャラ ちいかわ', image: 'images/silver-prize-11.jpg', selected: false },
+        { id: 12, name: 'マッサージガン', image: 'images/silver-prize-12.jpg', selected: false },
+        { id: 13, name: 'ReFa ヘアブラシ', image: 'images/silver-prize-13.jpg', selected: false },
+        { id: 14, name: 'サウナハット', image: 'images/silver-prize-14.jpg', selected: false },
+        { id: 15, name: '缶詰おつまみ 3缶セット', image: 'images/silver-prize-15.jpg', selected: false },
     ],
 };
 
@@ -197,7 +197,7 @@ document.getElementById('drawButton').addEventListener('click', () => {
     drawingCount++;
 
     playDrawSound(time / 1000);
-    
+
     // アニメーション完了後にボタンを再度有効化
     setTimeout(() => {
         gameControlButtons.forEach(button => {
@@ -266,7 +266,7 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
         const msg = document.getElementById('pre-result-message');
 
         msg.innerHTML = ``;
-        
+
         playResultButtonSound();
         showScreen('preResultScreen');
         anime({
@@ -293,7 +293,7 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
                 duration: 150,
                 easing: 'easeInElastic(10,1)',
                 delay: anime.stagger(100)
-            }); 
+            });
         }, 1500);
 
         setTimeout(() => {
@@ -305,7 +305,7 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
                 duration: 150,
                 easing: 'easeInElastic(10,1)',
                 delay: anime.stagger(100)
-            }); 
+            });
         }, 3500);
 
         setTimeout(() => {
@@ -313,7 +313,7 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
         }, 5000);
 
         setTimeout(() => {
-            
+
             showAxeResult();
 
             anime({
@@ -321,7 +321,7 @@ document.getElementById('axeResultButton').addEventListener('click', () => {
                 scale: [0, 1],
                 duration: 1200,
             })
-        }, 7800);   
+        }, 7800);
     }
 })
 
@@ -627,7 +627,7 @@ function displayConfirmWindow(prize, isGold){
         easing: 'easeOutExpo',
         duration: 1000
       });
-      
+
       tl
       .add({
         targets: '#line1',
@@ -642,7 +642,7 @@ function displayConfirmWindow(prize, isGold){
         translateX: [-1700, -20],
       }, '-=500')
 
-      
+
 }
 
 /**
@@ -680,7 +680,7 @@ function selectPrize(prize, isGold) {
 
     showScreen(winScreen);
     enhancePrizeSelection(winDisplay);
-    
+
     anime({
         targets: winDisplay,
         translateY: [-500, 0],
@@ -832,7 +832,7 @@ function lastOneAnimetion(text, elemId, target, timeout) {
             duration: 80,
             easing: 'easeInElastic(10,1)',
             delay: anime.stagger(100)
-        }); 
+        });
     }, timeout);
 }
 
@@ -870,8 +870,8 @@ modalComplete.addEventListener('click', () => {
     individualFirstAnimationSetting = animationToggle.checked;
     firstAnimationLength = inputValueCheck(inputFirstAnimation);
     window.api.send(
-        "update_animation_length", 
-        { 
+        "update_animation_length",
+        {
             animationLength,
             individualFirstAnimationSetting,
             firstAnimationLength

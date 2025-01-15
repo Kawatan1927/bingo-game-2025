@@ -75,6 +75,12 @@
         <button class="back-to-bingo-btn small-button">ビンゴに戻る</button>
     </div>
 
+    <div id="preResultScreen" class="screen pre-result">
+        <div class="wrap">
+            <div id="pre-result-message" class="pre-result-message"></div>
+        </div>
+    </div>
+
     <div id="resultScreen" class="screen">
         <h1 class="screen-title">結果発表</h1>
         <div id="resultMessage" class="result-text"></div>
@@ -94,6 +100,18 @@
         <div id="standardPrizeGrid" class="prize-grid"></div>
     </div>
 
+    <div id="standardConfirmScreen" class="screen">
+        <h1 class="screen-title">こちらの景品で確定します。</h1>
+        <div style="display: flex;">
+            <div id="standardItemImg" class="win-display"></div>
+            <div id="standardItemTxt" class="win-display"></div>
+        </div>
+        <div style="display: flex;">
+            <button id="confirmStandardItem" class="small-button">景品を確定する</button>
+            <button id="backToSelectStandardItem" class="small-button">選びなおす</button>
+        </div>
+    </div>
+
     <div id="standardWinScreen" class="screen">
         <h1 class="screen-title">おめでとうございます！</h1>
         <div id="silverWinDisplay" class="win-display"></div>
@@ -103,6 +121,18 @@
     <div id="premiumPrizeScreen" class="screen">
         <h1 class="screen-title">プレミアム景品を選んでください</h1>
         <div id="premiumPrizeGrid" class="prize-grid"></div>
+    </div>
+
+    <div id="premiumConfirmScreen" class="screen">
+        <h1 class="screen-title">こちらの景品で確定します。</h1>
+        <div style="display: flex;">
+            <div id="premiumItemImg" class="win-display"></div>
+            <div id="premiumItemTxt" class="win-display"></div>
+        </div>
+        <div style="display: flex;">
+            <button id="confirmPremiumItem" class="small-button">景品を確定する</button>
+            <button id="backToSelectPremiumItem" class="small-button">選びなおす</button>
+        </div>
     </div>
 
     <div id="premiumWinScreen" class="screen">
@@ -124,6 +154,22 @@
         <button class="back-to-bingo-btn small-button">ビンゴに戻る</button>
     </div>
 
+    <div id="preLastOneScreen" class="screen pre-last-one">
+        <div>
+            <div id="pre-last-one-message1" class="pre-last-one-message1"></div>
+            <div id="pre-last-one-message2" class="pre-last-one-message2"></div>
+            <div id="pre-last-one-message3" class="pre-last-one-message3"></div>
+            <div id="pre-last-one-message4" class="pre-last-one-message4"></div>
+            <div id="pre-last-one-message5" class="pre-last-one-message5"></div>
+            <div id="pre-last-one-message6" class="pre-last-one-message6"></div>
+            <div id="pre-last-one-message7" class="pre-last-one-message7"></div>
+            <div id="pre-last-one-message8" class="pre-last-one-message8"></div>
+            <div id="pre-last-one-message9" class="pre-last-one-message9"></div>
+            <div id="pre-last-one-message10" class="pre-last-one-message10"></div>
+            <div id="pre-last-one-message11" class="pre-last-one-message11"></div>
+        </div>
+    </div>
+
     <div id="lastOnePrizeScreen" class="screen">
         <h1 class="screen-title">ラストワン賞</h1>
         <div id="lastOnePrizeDisplay" class="win-display">
@@ -132,11 +178,10 @@
         <h1>JTBプレミアムギフトカタログ</h1>
     </div>
 
-    <audio id="drawSound" src="sounds/draw.mp3"></audio>
-    <audio id="resultSound" src="sounds/result.mp3"></audio>
-    <audio id="winSound" src="sounds/win.mp3"></audio>
-
+    <script src="audio.js"></script>
+    <script src="node_modules/animejs/lib/anime.min.js"></script>
     <script src="script.js"></script>
     <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script src="./vanilla-tilt.js"></script>
 </body>
 </html>

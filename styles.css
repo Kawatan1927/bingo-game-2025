@@ -318,28 +318,32 @@ label.toggle:has(input[type="checkbox"]){
     justify-content: space-around;
     margin: 40px 0;
     width: 100%;
+    gap: 60px;
 }
 
 .axe {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     cursor: pointer;
-    height: 30vh;
+    height: 40vh;
     padding: 20px;
     position: relative;
     transition: all 0.3s;
-    width: 30vh;
+    width: 40vh;
+}
+
+.axe.gold {
+    border: 5px solid #FDB931 ;
+}
+
+.axe.silver {
+    border: 5px solid #E8E8E8 ;
 }
 
 .axe img {
     height: 100%;
     object-fit: contain;
     width: 100%;
-}
-
-.axe:hover {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-    transform: scale(1.1);
 }
 
 /* 結果発表アニメーションエリア */

@@ -9,6 +9,7 @@ let individualFirstAnimationSetting;
 let firstAnimationLength;
 let animationLengthMin = 1000; // アニメーション長最小値
 let animationLengthMax = 10000; // アニメーション長最大値
+let saveLogFolderPath;
 
 // メインプロセスから設定ファイルの値を受信およびキャスト
 window.api.on("settings", (arg) => {
@@ -93,6 +94,14 @@ function updateSelectedPrizes(){
 
     selectedPremiumPrize.selected = true;
     selectedStandardPrize.selected = true;
+
+    window.api.send(
+        "updateSelcPrize",
+        {
+            selectedPremiumId,
+            selectedStandardId
+        }
+    );
 }
 
 // アニメーション長設定欄
@@ -195,6 +204,23 @@ document.getElementById('drawButton').addEventListener('click', () => {
 
     const time = (drawingCount == 0) && animationToggle.checked ? firstAnimationLength : animationLength;
     drawingCount++;
+
+    if (drawingCount == 1){
+        window.api.send(
+            "gameStart",
+            {
+                bingoNumbers,
+                drawingCount
+            }
+        );
+    }else{
+        window.api.send(
+            "countUpdate",
+            {
+                drawingCount,
+            }
+        );
+    }
 
     playDrawSound(time / 1000);
 
@@ -855,6 +881,7 @@ const modal = document.querySelector('.js-modal');
 const modalButton = document.querySelector('.js-modal-button');
 const modalComplete = document.querySelector('.js-complete-button');
 const modalClose = document.querySelector('.js-close-button');
+const saveLogFolder = document.getElementById('log-folder');
 
 // 設定ボタン押下時イベント
 modalButton.addEventListener('click', () => {
@@ -869,13 +896,15 @@ modalComplete.addEventListener('click', () => {
     animationLength = inputValueCheck(inputAnimationLength);
     individualFirstAnimationSetting = animationToggle.checked;
     firstAnimationLength = inputValueCheck(inputFirstAnimation);
+
     window.api.send(
         "update_animation_length",
         {
             animationLength,
             individualFirstAnimationSetting,
             firstAnimationLength
-        });
+        }
+    );
 });
 
 // キャンセルボタン押下時イベント
@@ -906,3 +935,22 @@ function inputValueCheck(inputValueElem) {
         return inputValueElem.value;
     };
 }
+
+// 保存先フォルダ入力欄
+$('#js-selectFolder').on('click', 'button', function () {
+    $('#log-folder').click();
+    return false;
+});
+
+$('#log-folder').on('change', function() {
+    //選択したファイル情報を取得し変数に格納
+    var file = $(this).prop('files')[0];
+    //アイコンを選択中に変更
+    $('#js-selectFolder').find('.choose-status').addClass('select').html('選択中');
+    //未選択→選択の場合（.filenameが存在しない場合）はファイル名表示用の<div>タグを追加
+    if(!($('.filename').length)){
+        $('#js-selectFolder').append('<div class="foldername"></div>');
+    };
+    //ファイル名を表示
+    $('.foldername').html('フォルダ名：' + file.name);
+});

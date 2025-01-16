@@ -949,7 +949,7 @@ modalComplete.addEventListener('click', () => {
                 }
             }
         });
-    }, 2000)
+    }, 500)
 });
 
 // キャンセルボタン押下時イベント

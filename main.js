@@ -168,8 +168,8 @@ ipcMain.on("gameStart", (event, arg) => {
   console.log(arg);
 
   setTimeout(() => {
-    numLogFileName = logFolder + '/' + startTimeStamp + '/num_table.bingolog';
-    selcPrizeLogFileName = logFolder + '/' + startTimeStamp + '/selc_prizes.bingolog';
+    numLogFileName = logFolder + '/' + startTimeStamp + '/' + startTimeStamp +'_num_table.bingolog';
+    selcPrizeLogFileName = logFolder + '/' + startTimeStamp + '/' + startTimeStamp + '_selc_prizes.bingolog';
     createLogFile(numLogFileName);
     createLogFile(selcPrizeLogFileName);
   }, 100);
@@ -182,12 +182,12 @@ ipcMain.on("gameStart", (event, arg) => {
 
 //  レンダラープロセス側から2回目以降の抽選開始フラグを受信する
 ipcMain.on("countUpdate", (event, arg) => {
-  writeNumLog(arg.drawingCount);
+  writeNumLogF(arg.bingoNumbers, arg.drawingCount);
 })
 
 // レンダラープロセス側から景品獲得状況を受信する
 ipcMain.on("updateSelcPrize", (event, arg) => {
-  writePrizeLog(arg.selectedPremiumId, arg.selectedStandardId);
+  writePrizeLog(arg.selectedId);
 })
 
 // 日時データフォーマット関数
@@ -237,16 +237,6 @@ function writeNumLogF(numbers, count){
   });
 }
 
-// 番号ログ保存関数(初回以降)
-function writeNumLog(count){
-  // 75Byte目に抽選カウントを格納
-  ndv.setUint8(75, count);
-
-  fs.writeFile(numLogFileName, ndv, function (err) {
-    console.log(err);
-  });
-}
-
 // 景品獲得ログ初期化関数
 function prizeLogInit(){
   for(var i = 0; i < 30; i++){
@@ -259,11 +249,53 @@ function prizeLogInit(){
 }
 
 // 景品獲得ログ更新関数
-function writePrizeLog(pId, sId){
-  pdv.setUint8(pId - 1, 255);
-  pdv.setUint8(sId - 1, 255);
+function writePrizeLog(selectedId){
+  for(var i = 0; i < selectedId.length; i++){
+    pdv.setUint8(selectedId[i] - 1, 255);
+  }
 
   fs.writeFile(selcPrizeLogFileName, pdv, function (err) {
     console.log(err);
   })
 }
+
+// レンダラープロセス側からログファイル名を受信する
+ipcMain.on("readLogFile", (event, arg) => {
+  startTimeStamp = arg.fileName;
+  numLogFileName = logFolder + '/' + startTimeStamp + '/' + startTimeStamp + '_num_table.bingolog';
+  selcPrizeLogFileName = logFolder + '/' + startTimeStamp + '/' + startTimeStamp + '_selc_prizes.bingolog';
+
+  const returnNumbers = [];
+  const returnSelcPrizes = [];
+
+  fs.readFile(numLogFileName, function(err, data) {
+    for(var i = 0; i < 76; i++){
+      numBuffer[i] = data[i];
+      returnNumbers[i] = data[i];
+    }
+
+    console.log(ndv);
+    console.log(returnNumbers);
+  });
+
+  fs.readFile(selcPrizeLogFileName, function(err, data) {
+    for(var i = 0; i < 30; i++){
+      prizeBuffer[i] = data[i];
+      returnSelcPrizes[i] = data[i];
+    }
+
+    console.log(pdv);
+    console.log(returnSelcPrizes);
+  });
+
+  setTimeout(() => {
+    mainWindow.webContents.send(
+    "recover",
+    {
+      returnNumbers,
+      returnSelcPrizes
+    }
+  )
+  }, 1000)
+  
+});

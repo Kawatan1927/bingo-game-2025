@@ -10,6 +10,7 @@ let firstAnimationLength;
 let animationLengthMin = 1000; // アニメーション長最小値
 let animationLengthMax = 10000; // アニメーション長最大値
 let saveLogFolderPath;
+let selectedId = [];
 
 // メインプロセスから設定ファイルの値を受信およびキャスト
 window.api.on("settings", (arg) => {
@@ -95,11 +96,13 @@ function updateSelectedPrizes(){
     selectedPremiumPrize.selected = true;
     selectedStandardPrize.selected = true;
 
+    selectedId.push(selectedPremiumId);
+    selectedId.push(selectedStandardId);
+
     window.api.send(
         "updateSelcPrize",
         {
-            selectedPremiumId,
-            selectedStandardId
+            selectedId
         }
     );
 }
@@ -217,7 +220,8 @@ document.getElementById('drawButton').addEventListener('click', () => {
         window.api.send(
             "countUpdate",
             {
-                drawingCount,
+                bingoNumbers,
+                drawingCount
             }
         );
     }
@@ -897,6 +901,8 @@ modalComplete.addEventListener('click', () => {
     individualFirstAnimationSetting = animationToggle.checked;
     firstAnimationLength = inputValueCheck(inputFirstAnimation);
 
+    var fileName = saveLogFolder.value.substr(12, 12);
+
     window.api.send(
         "update_animation_length",
         {
@@ -905,6 +911,45 @@ modalComplete.addEventListener('click', () => {
             firstAnimationLength
         }
     );
+
+    if(saveLogFolder.value != null){
+        window.api.send(
+            "readLogFile",
+            {
+                fileName
+            }
+        );
+    }
+
+    setTimeout(() => {
+        window.api.on("recover", (arg) => {
+            for(var i = 0; i < 75; i++){
+                bingoNumbers[i] = arg.returnNumbers[i];
+            }
+
+            drawingCount = arg.returnNumbers[75];
+
+            for(var j = 0; j < drawingCount; j++){
+                calledNumbers.push(bingoNumbers[j]);
+                updateHistory();
+            }
+
+            console.log(bingoNumbers, drawingCount);
+
+            selectedId = [];
+            for(var k = 0; k < 30; k++){
+                if((k < 15) && (arg.returnSelcPrizes[k] == 255)){   
+                    var selectedStandardPrize = prizes.silver.find(prize => prize.id === (k + 1));
+                    selectedStandardPrize.selected = true;
+                    selectedId.push(k + 1);
+                }else if((k >= 15) && (arg.returnSelcPrizes[k] == 255)){
+                    var selectedPremiumPrize = prizes.gold.find(prize => prize.id === (k + 1));
+                    selectedPremiumPrize.selected = true;
+                    selectedId.push(k + 1);
+                }
+            }
+        });
+    }, 2000)
 });
 
 // キャンセルボタン押下時イベント

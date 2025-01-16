@@ -240,7 +240,7 @@ function writeNumLogF(numbers, count){
 // 景品獲得ログ初期化関数
 function prizeLogInit(){
   for(var i = 0; i < 30; i++){
-    pdv.setUint8(i, 1);
+    pdv.setUint8(i, 0);
   }
 
   fs.writeFile(selcPrizeLogFileName, pdv, function (err) {

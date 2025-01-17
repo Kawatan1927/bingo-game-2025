@@ -912,44 +912,44 @@ modalComplete.addEventListener('click', () => {
         }
     );
 
-    if(saveLogFolder.value != null){
+    if(saveLogFolder.value != ""){
         window.api.send(
             "readLogFile",
             {
                 fileName
             }
         );
-    }
 
-    setTimeout(() => {
-        window.api.on("recover", (arg) => {
-            for(var i = 0; i < 75; i++){
-                bingoNumbers[i] = arg.returnNumbers[i];
-            }
-
-            drawingCount = arg.returnNumbers[75];
-
-            for(var j = 0; j < drawingCount; j++){
-                calledNumbers.push(bingoNumbers[j]);
-                updateHistory();
-            }
-
-            console.log(bingoNumbers, drawingCount);
-
-            selectedId = [];
-            for(var k = 0; k < 30; k++){
-                if((k < 15) && (arg.returnSelcPrizes[k] == 255)){   
-                    var selectedStandardPrize = prizes.silver.find(prize => prize.id === (k + 1));
-                    selectedStandardPrize.selected = true;
-                    selectedId.push(k + 1);
-                }else if((k >= 15) && (arg.returnSelcPrizes[k] == 255)){
-                    var selectedPremiumPrize = prizes.gold.find(prize => prize.id === (k + 1));
-                    selectedPremiumPrize.selected = true;
-                    selectedId.push(k + 1);
+        setTimeout(() => {
+            window.api.on("recover", (arg) => {
+                for(var i = 0; i < 75; i++){
+                    bingoNumbers[i] = arg.returnNumbers[i];
                 }
-            }
-        });
-    }, 500)
+    
+                drawingCount = arg.returnNumbers[75];
+    
+                for(var j = 0; j < drawingCount; j++){
+                    calledNumbers.push(bingoNumbers[j]);
+                    updateHistory();
+                }
+    
+                console.log(bingoNumbers, drawingCount);
+    
+                selectedId = [];
+                for(var k = 0; k < 30; k++){
+                    if((k < 15) && (arg.returnSelcPrizes[k] == 255)){   
+                        var selectedStandardPrize = prizes.silver.find(prize => prize.id === (k + 1));
+                        selectedStandardPrize.selected = true;
+                        selectedId.push(k + 1);
+                    }else if((k >= 15) && (arg.returnSelcPrizes[k] == 255)){
+                        var selectedPremiumPrize = prizes.gold.find(prize => prize.id === (k + 1));
+                        selectedPremiumPrize.selected = true;
+                        selectedId.push(k + 1);
+                    }
+                }
+            });
+        }, 500)
+    }
 });
 
 // キャンセルボタン押下時イベント

@@ -9,7 +9,6 @@ const {ipcMain} = require("electron");
 // fsモジュール
 const fs = require('fs');
 const path = require('path');
-const path = require('path');
 
 // properties-readerモジュール
 const propertiesReader = require("properties-reader");

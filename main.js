@@ -233,7 +233,7 @@ function writeNumLogF(numbers, count){
   ndv.setUint8(75, count);
 
   fs.writeFile(numLogFileName, ndv, function (err) {
-    console.log(err);
+    console.log('Error writing to numLogFileName:', err);
   });
 }
 

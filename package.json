@@ -22,6 +22,7 @@
       "sounds",
       "audio.js",
       "bingo.html",
+      "jquery-3.7.1.min.js",
       "main.js",
       "package-lock.json",
       "package.json",

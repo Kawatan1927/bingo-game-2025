@@ -255,7 +255,7 @@ function writePrizeLog(selectedId){
   }
 
   fs.writeFile(selcPrizeLogFileName, pdv, function (err) {
-    console.log(err);
+    console.log('Error writing to prize log file:', selcPrizeLogFileName, err);
   })
 }
 

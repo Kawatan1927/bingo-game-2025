@@ -9,6 +9,8 @@ let individualFirstAnimationSetting;
 let firstAnimationLength;
 let animationLengthMin = 1000; // アニメーション長最小値
 let animationLengthMax = 10000; // アニメーション長最大値
+let saveLogFolderPath;
+let selectedId = [];
 
 // メインプロセスから設定ファイルの値を受信およびキャスト
 window.api.on("settings", (arg) => {
@@ -93,6 +95,16 @@ function updateSelectedPrizes(){
 
     selectedPremiumPrize.selected = true;
     selectedStandardPrize.selected = true;
+
+    selectedId.push(selectedPremiumId);
+    selectedId.push(selectedStandardId);
+
+    window.api.send(
+        "updateSelcPrize",
+        {
+            selectedId
+        }
+    );
 }
 
 // アニメーション長設定欄
@@ -195,6 +207,24 @@ document.getElementById('drawButton').addEventListener('click', () => {
 
     const time = (drawingCount == 0) && animationToggle.checked ? firstAnimationLength : animationLength;
     drawingCount++;
+
+    if (drawingCount == 1){
+        window.api.send(
+            "gameStart",
+            {
+                bingoNumbers,
+                drawingCount
+            }
+        );
+    }else{
+        window.api.send(
+            "countUpdate",
+            {
+                bingoNumbers,
+                drawingCount
+            }
+        );
+    }
 
     playDrawSound(time / 1000);
 
@@ -855,6 +885,7 @@ const modal = document.querySelector('.js-modal');
 const modalButton = document.querySelector('.js-modal-button');
 const modalComplete = document.querySelector('.js-complete-button');
 const modalClose = document.querySelector('.js-close-button');
+const saveLogFolder = document.getElementById('log-folder');
 
 // 設定ボタン押下時イベント
 modalButton.addEventListener('click', () => {
@@ -869,13 +900,56 @@ modalComplete.addEventListener('click', () => {
     animationLength = inputValueCheck(inputAnimationLength);
     individualFirstAnimationSetting = animationToggle.checked;
     firstAnimationLength = inputValueCheck(inputFirstAnimation);
+
+    var fileName = saveLogFolder.value.substr(12, 12);
+
     window.api.send(
         "update_animation_length",
         {
             animationLength,
             individualFirstAnimationSetting,
             firstAnimationLength
-        });
+        }
+    );
+
+    if(saveLogFolder.value != ""){
+        window.api.send(
+            "readLogFile",
+            {
+                fileName
+            }
+        );
+
+        setTimeout(() => {
+            window.api.on("recover", (arg) => {
+                for(var i = 0; i < 75; i++){
+                    bingoNumbers[i] = arg.returnNumbers[i];
+                }
+    
+                drawingCount = arg.returnNumbers[75];
+    
+                for(var j = 0; j < drawingCount; j++){
+                    calledNumbers.push(bingoNumbers[j]);
+                    updateHistory();
+                }
+    
+                console.log(bingoNumbers, drawingCount);
+    
+                selectedId = [];
+                for(var k = 0; k < 30; k++){
+                    if((k < 15) && (arg.returnSelcPrizes[k] == 255)){   
+                        var selectedStandardPrize = prizes.silver.find(prize => prize.id === (k + 1));
+                        selectedStandardPrize.selected = true;
+                        selectedId.push(k + 1);
+                    }else if((k >= 15) && (arg.returnSelcPrizes[k] == 255)){
+                        var selectedPremiumPrize = prizes.gold.find(prize => prize.id === (k + 1));
+                        selectedPremiumPrize.selected = true;
+                        selectedId.push(k + 1);
+                    }
+                }
+            });
+        }, 500)
+    }
 });
 
 // キャンセルボタン押下時イベント
@@ -906,3 +980,22 @@ function inputValueCheck(inputValueElem) {
         return inputValueElem.value;
     };
 }
+
+// 保存先フォルダ入力欄
+$('#js-selectFolder').on('click', 'button', function () {
+    $('#log-folder').click();
+    return false;
+});
+
+$('#log-folder').on('change', function() {
+    //選択したファイル情報を取得し変数に格納
+    var file = $(this).prop('files')[0];
+    //アイコンを選択中に変更
+    $('#js-selectFolder').find('.choose-status').addClass('select').html('選択中');
+    //未選択→選択の場合（.filenameが存在しない場合）はファイル名表示用の<div>タグを追加
+    if(!($('.filename').length)){
+        $('#js-selectFolder').append('<div class="foldername"></div>');
+    };
+    //ファイル名を表示
+    $('.foldername').html('フォルダ名：' + file.name);
+});

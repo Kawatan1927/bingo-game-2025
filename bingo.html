@@ -51,6 +51,12 @@
                         <p style="text-align: center;">
                             初回アニメーション長　　：<input type="number" id="firstAnimationLength" class="setting-form-number" step="100"> ms
                         </p>
+                        <div id="js-selectFolder" style="text-align: center;">
+                            <p style="text-align: left; padding-left: 6%;">読み込みログフォルダ</p>
+                            <input id="log-folder" type="file" style="display:none" webkitdirectory>
+                            <button class="folder-button">ログフォルダを選択</button>
+                            <span class="choose-status">未選択</span>
+                        </div>
                         <p style="text-align: center; padding-top: 10px;">
                             <button class="setting-form-button js-complete-button">設定完了</button>
                             <button class="setting-form-button js-close-button">キャンセル</button>
@@ -179,6 +185,7 @@
     </div>
 
     <script src="audio.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
     <script src="node_modules/animejs/lib/anime.min.js"></script>
     <script src="script.js"></script>
     <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>

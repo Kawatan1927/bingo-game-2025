@@ -18,18 +18,11 @@
     },
     "files": [
       "assets",
-      "images",
       "sounds",
-      "audio.js",
-      "bingo.html",
-      "jquery-3.7.1.min.js",
+      "src",
       "main.js",
       "package-lock.json",
-      "package.json",
-      "preload.js",
-      "script.js",
-      "styles.css",
-      "vanilla-tilt.js"
+      "package.json"
     ],
     "win": {
       "icon": "assets/win/bingo.ico",

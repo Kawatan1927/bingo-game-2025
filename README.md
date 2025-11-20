@@ -48,16 +48,35 @@ BINGO-GAME-2025
 
 ## 5. <a id="ディレクトリ構成">ディレクトリ構成</a>
 
-可能ならどこかのタイミングでプロジェクト内のフォルダ構成を整理することを検討したい。
+プロジェクトのフォルダ構成は以下の通りです。
 
 ```
 .
-├── src
-    ├── css
-    ├── html
-    └── js
+├── src/                     # ソースコード
+│   ├── css/                # スタイルシート
+│   │   └── styles.css
+│   ├── html/               # HTMLファイル
+│   │   └── bingo.html
+│   └── js/                 # JavaScriptファイル
+│       ├── audio.js
+│       ├── script.js
+│       ├── preload.js
+│       └── lib/            # 外部ライブラリ
+│           ├── jquery-3.7.1.min.js
+│           └── vanilla-tilt.js
+├── assets/                 # アセットファイル
+│   ├── win/                # Windowsアイコン
+│   └── images/             # 画像ファイル（賞品画像など）
+├── sounds/                 # 音声ファイル
+├── docs/                   # ドキュメント関連
+│   └── images/             # README用画像
+├── dist/                   # ビルド出力先
+├── node_modules/           # npmパッケージ
+├── main.js                 # Electronメインプロセス
+├── package.json
+├── package-lock.json
+└── README.md
 ```
-↑みたいな感じで
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
@@ -74,7 +93,7 @@ BINGO-GAME-2025
 
 1. <a href="https://nodejs.org/ja/download/">「ダウンロード|Node.js」</a>のページから、インストーラーをダウンロードします。<br />
 バージョンについては最新のもので問題ありません。
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 210637.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 210637.png>)
 >[!NOTE]
 >CurrentとLTSの2種類がありますが、LTS(安定板：長期の保守運用が約束されているバージョン)のダウンロードを推奨します。
 >Currentはリリース後6ヶ月経っていないバージョンのため、本番環境等での使用は慎重に行ってください。
@@ -83,37 +102,37 @@ BINGO-GAME-2025
   
 3. 「Next」をクリックします。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215620.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215620.png>)
 
 4. 「I accept the term in the Licence Agreement」にチェックを入れ、「Next」をクリックします。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215633.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215633.png>)
 
 5. インストール先を選択し、「Next」をクリックします。(こだわり等なければデフォルトのままでOK)
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215639.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215639.png>)
 
 6. インストールしたいコンポーネントを選択し、「Next」をクリックします。(npm package managerが含まれていればOK)
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215740.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215740.png>)
 
 7. Chocolateyのインストールにチェックを入れずに「Next」をクリックします。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215934.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215934.png>)
 >[!NOTE]
 >Chocolateyとは「コマンドラインによるアプリケーションの導入や削除を実現するパッケージ管理システム」です。
 
 8. 「Install」をクリックします。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215941.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215941.png>)
 
 9. インストールが開始されるので、しばらく待ちます。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215950.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215950.png>)
 
 10. インストールが完了したら「Finish」をクリックします。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-27 215958.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-27 215958.png>)
 
 11. インストールが成功しているか確認をします。
 
@@ -195,7 +214,7 @@ zipをダウンロードするなり、自分のワークスペースにcloneす
     > electron .
     ```
 
-    ![alt text](<MarkdownImg/スクリーンショット 2024-12-28 132312.png>)
+    ![alt text](<docs/images/スクリーンショット 2024-12-28 132312.png>)
     ※開発中の画面です。
 
 6. コマンド```npm run build```を実行するとビルドが開始します。
@@ -215,7 +234,7 @@ zipをダウンロードするなり、自分のワークスペースにcloneす
 - ```./dist```内にある```bingo-game-2024 Setup 1.0.0.exe```がインストーラーです。
 - ```./dist/win-unpacked```内にある```bingo-game-2024.exe```が実行ファイルです。
 
-![alt text](<MarkdownImg/スクリーンショット 2024-12-28 133822.png>)
+![alt text](<docs/images/スクリーンショット 2024-12-28 133822.png>)
 <br />
 ※アイコンは2024/12/28時点のものです。
 
@@ -284,7 +303,7 @@ zipをダウンロードするなり、自分のワークスペースにcloneす
 >メインプロセスで作成されたアプリ画面をChromiumでレンダリングして表示します。1つのアプリに対して複数個(=画面の数だけ)用意することができます。<br />
 >アプリの画面レイアウト・装飾をHTML・CSS・JavaScriptで行います。<br />
 >
->![alt text](<MarkdownImg/スクリーンショット 2024-12-28 145651.png>)
+>![alt text](<docs/images/スクリーンショット 2024-12-28 145651.png>)
 <br />
 今回は画面に「Hello World」を出力させてみます。
 
@@ -347,7 +366,7 @@ app.on('ready', function() {
     ```実行結果
     \electron-test>.\node_modules\.bin\electron .\
     ```
-    ![alt text](<MarkdownImg/スクリーンショット 2024-12-28 153038.png>)<br />
+    ![alt text](<docs/images/スクリーンショット 2024-12-28 153038.png>)<br />
     アプリケーションウインドウが立ち上がります。<br />
     終了する際は、ウインドウを閉じてください。
 

@@ -3,22 +3,22 @@ let audioContext = null;
  
 // 読み込む音声ソース用のオブジェクト（プロパティ名は再生時に使用）
 const audioFiles = {
-    decisionButton: "sounds/Button_SE8.mp3",
-    cancelButton: "sounds/Button_SE7.mp3",
-    transitionButton: "sounds/Button_SE9.mp3",
-    resultButton: "sounds/Button_SE_10.mp3",
-    lastOneButton: "sounds/Button_SE_11.mp3",
-    drawButton: "sounds/Button_SE4.mp3",
-    drawStart: "sounds/Digital_Count_SE1.mp3",
-    drawStop: "sounds/Digital_Count_Stop_SE1.mp3",
-    drumroll: "sounds/Drumroll_Only_SE.mp3",
-    cymbalCrash: "sounds/Cymbal_Crash_SE2.mp3",
-    cheer: "sounds/Cheer_SE.mp3",
-    getPrize: "sounds/Get_Prize_SE.mp3",
-    axeMove: "sounds/Axe_Move_SE.mp3",
-    axeStop: "sounds/Axe_Move_Stop_SE.mp3",
-    displayPrize: "sounds/Display_Prize_SE.mp3",
-    displayMessage: "sounds/Display_Message_SE.mp3"
+    decisionButton: "../../sounds/Button_SE8.mp3",
+    cancelButton: "../../sounds/Button_SE7.mp3",
+    transitionButton: "../../sounds/Button_SE9.mp3",
+    resultButton: "../../sounds/Button_SE_10.mp3",
+    lastOneButton: "../../sounds/Button_SE_11.mp3",
+    drawButton: "../../sounds/Button_SE4.mp3",
+    drawStart: "../../sounds/Digital_Count_SE1.mp3",
+    drawStop: "../../sounds/Digital_Count_Stop_SE1.mp3",
+    drumroll: "../../sounds/Drumroll_Only_SE.mp3",
+    cymbalCrash: "../../sounds/Cymbal_Crash_SE2.mp3",
+    cheer: "../../sounds/Cheer_SE.mp3",
+    getPrize: "../../sounds/Get_Prize_SE.mp3",
+    axeMove: "../../sounds/Axe_Move_SE.mp3",
+    axeStop: "../../sounds/Axe_Move_Stop_SE.mp3",
+    displayPrize: "../../sounds/Display_Prize_SE.mp3",
+    displayMessage: "../../sounds/Display_Message_SE.mp3"
 };
  
 // 音声ソース読み込み後のバッファ格納用

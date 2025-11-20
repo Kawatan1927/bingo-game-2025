@@ -124,10 +124,10 @@ app.on('ready', function() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: __dirname + '/preload.js'
+      preload: __dirname + '/src/js/preload.js'
     }
   });
-  mainWindow.loadURL('file://' + __dirname + '/bingo.html');
+  mainWindow.loadURL('file://' + __dirname + '/src/html/bingo.html');
 
   // デベロッパーツールの表示(必要だったらコメントアウトを外してください)
   //mainWindow.webContents.openDevTools();

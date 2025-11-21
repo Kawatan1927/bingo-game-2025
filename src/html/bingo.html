@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ビンゴ大会</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <button id="fullscreenBtn" class="small-button">全画面表示</button>
@@ -71,10 +71,10 @@
         <h1 class="screen-title">Which choose?</h1>
         <div class="axe-container">
             <div class="axe gold" data-axe="gold">
-                <img src="images/gold-axe.png" alt="金の斧">
+                <img src="../../assets/images/gold-axe.png" alt="金の斧">
             </div>
             <div class="axe silver" data-axe="silver">
-                <img src="images/silver-axe.png" alt="銀の斧">
+                <img src="../../assets/images/silver-axe.png" alt="銀の斧">
             </div>
         </div>
         <button id="axeResultButton" class="small-button">結果発表</button>
@@ -92,10 +92,10 @@
         <div id="resultMessage" class="result-text"></div>
         <div class="result-container">
             <div class="result">
-                <img id="goldImg" src="images/gold-axe.png" alt="金の斧">
+                <img id="goldImg" src="../../assets/images/gold-axe.png" alt="金の斧">
             </div>
             <div class="result">
-                <img id="silverImg" src="images/silver-axe.png" alt="銀の斧">
+                <img id="silverImg" src="../../assets/images/silver-axe.png" alt="銀の斧">
             </div>
         </div>
         <button id="toStandardPrizeButton" class="small-button">スタンダード景品選択へ</button>
@@ -179,16 +179,16 @@
     <div id="lastOnePrizeScreen" class="screen">
         <h1 class="screen-title">ラストワン賞</h1>
         <div id="lastOnePrizeDisplay" class="win-display">
-            <img src="images/last-one-prize.jpg" alt="ラストワン賞">
+            <img src="../../assets/images/last-one-prize.jpg" alt="ラストワン賞">
         </div>
         <h1>JTBプレミアムギフトカタログ</h1>
     </div>
 
-    <script src="audio.js"></script>
-    <script src="jquery-3.7.1.min.js"></script>
-    <script src="node_modules/animejs/lib/anime.min.js"></script>
-    <script src="script.js"></script>
-    <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
-    <script src="./vanilla-tilt.js"></script>
+    <script src="../js/audio.js"></script>
+    <script src="../js/lib/jquery-3.7.1.min.js"></script>
+    <script src="../../node_modules/animejs/lib/anime.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script src="../js/lib/vanilla-tilt.js"></script>
 </body>
 </html>

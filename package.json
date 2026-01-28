@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "electron": "^35.7.5",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.6.0"
   },
   "dependencies": {
     "animejs": "^3.2.2",
